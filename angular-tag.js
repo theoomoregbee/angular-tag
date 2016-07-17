@@ -100,7 +100,7 @@
          * @param input
          */
         $scope.update=function (input) {
-            //input.geneated_count=$scope.selected.length;
+            //input.generated_count=$scope.selected.length;
             $scope.selected.push(angular.copy(input));
             $scope.input="";
             $scope.hasError=false;
@@ -238,8 +238,8 @@
     };
 
     angular.module('angular-tag',[])
-        .directive('tagMe', directive)
-        .directive('focusMe',directive_focus)
+        .directive('tagMe', [directive])
+        .directive('focusMe',[directive_focus])
 
 }());
 

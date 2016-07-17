@@ -12,11 +12,12 @@ var webserver = require('gulp-webserver');
 
 
 gulp.task('webserver', function() {
-    gulp.src('/')
+    gulp.src('.')
         .pipe(webserver({
             livereload: true,
             directoryListing: true,
-            open: true
+            open: true,
+            port:8081
         }));
 });
 
@@ -76,9 +77,10 @@ gulp.task('clean-css', function () {
 
 
 
-gulp.task('watch', ['webserver'], function(){
-    gulp.watch('*/*.js', ['build-js']);
-    gulp.watch('*/*.css', ['build-css']);
+gulp.task('watch', function(){
+    gulp.watch('*.js', ['build-js']);
+    gulp.watch('*.css', ['build-css']);
+    gulp.watch('**/*.html', ['webserver']);
 });
 
-gulp.task("serve",['watch']);
+gulp.task("serve",['watch','webserver']);
