@@ -1,6 +1,4 @@
 
-<p>this is for input file type For File:{{type}}</p>
-
 <div class="tag-container">
  <ul ng-class="['tag',{focus:isFocus},theme ]" ng-click="isFocus=true">
     <li ng-repeat="select in selected">
@@ -10,6 +8,4 @@
     <input ng-class="{error:hasError}" ng-model="input" ng-keyup="on_input_keyup($event)" ng-focus="isFocus=true" ng-blur="isFocus=false" focus-me="isFocus"  style="" type="input" placeholder="Enter Text with , separated"  >
 </li>
  </ul>
-
-
 </div>

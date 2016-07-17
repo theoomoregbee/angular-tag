@@ -20,6 +20,12 @@
  * Ability to style it , but comes with two styled themes
  *          1. Material
  *          2. Default
+ *
+ * The directive emits 2 events
+ *          1. tagAdded is emitted with the added item to the parent scope
+ *          2. tagRemoved is emitted with the removed item to the parent Scope
+ *
+ *  Type Head features
  */
 
 (function () {
@@ -90,7 +96,7 @@
         };
 
         /**
-         * this method updates our tag view with the input parameter
+         * this method updates our tag view with the input parameter, and emit a message to the parent that an object is gotten
          * @param input
          */
         $scope.update=function (input) {
@@ -98,6 +104,7 @@
             $scope.selected.push(angular.copy(input));
             $scope.input="";
             $scope.hasError=false;
+            $scope.$emit('tagAdded',input);
         };
 
 
@@ -113,7 +120,6 @@
                 return $scope.default_input;
             }else
                return data_check;//means is on our data set , so pick the item from there
-
         };
         
         /**
@@ -181,8 +187,13 @@
                 console.error("Error, Existing before in our output , or not among data set");
             };
 
+        /**
+         * This method removes the item from our selected tags, and it broadcast an event that an element has been removed to its parent
+         * @param item
+         */
         $scope.remove=function (item) {
           $scope.selected=$filter('filter')($scope.selected, function(value, index) {return value !== item;});
+            $scope.$emit('tagRemoved',item);
         };
 
     };
@@ -205,7 +216,7 @@
                 return 'templates/'+attr.type+'.html';
             },
             controller: controllerFunction, //Embed a custom controller in the directive
-            link: function ($scope, element, attrs) { 
+            link: function ($scope, element, attrs) {
             } //DOM manipulation
         };
     };
@@ -229,10 +240,6 @@
     angular.module('angular-tag',[])
         .directive('tagMe', directive)
         .directive('focusMe',directive_focus)
-        .controller('MainCtrl',function ($scope) {
-            $scope.data=[{text:'Jss1',added:'test'},{text:'Jss2',add:'test3'},{text:'Jss3',value:'owk'}];
-            $scope.selected=[];
-        })
 
 }());
 

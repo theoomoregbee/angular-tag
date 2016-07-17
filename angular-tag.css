@@ -73,7 +73,7 @@
 {
     color: #fff;
     background-color: #369;
-    font-size:79%;
+    font-size:85%;
     font-weight: 700;
 }
 
@@ -81,9 +81,10 @@
 {
     text-decoration: none;
     color: #fff;
-    margin-left: 2px;
-    margin-right: -17px;
-    padding-right: 11px;
+    margin-right: -7px;
+    padding-right: 3px;
+    text-align: center;
+    padding-left: 3px;
 }
 .tag-container ul li a:hover
 {

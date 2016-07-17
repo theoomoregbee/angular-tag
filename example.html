@@ -1,12 +1,33 @@
 <!DOCTYPE html >
-<html lang="en" ng-app="angular-tag">
+<html lang="en" ng-app="example">
 <head>
     <meta charset="UTF-8">
     <title>Tag Test</title>
 <script src="bower_components/angular/angular.js"></script>
 <script src="angular-tag.js"></script>
-<link rel="stylesheet" href="angular-tag.css">    
+<link rel="stylesheet" href="angular-tag.css">
 </link>
+
+   <script >
+       angular.module('example',['angular-tag'])
+
+         .controller('MainCtrl',function ($scope) {
+    $scope.data=[{text:'Jss1',added:'test'},{text:'Jss2',add:'test3'},{text:'Jss3',value:'owk'}];
+    $scope.selected=[];
+
+    $scope.$on('tagAdded', function (event, data) {
+    console.log(data); // 'Some data'
+    });
+
+    $scope.$on('tagRemoved', function (event, data) {
+    console.log(data); // 'Some data'
+    console.log(event);
+    });
+
+    })
+   </script>
+    
+    
 </head>
 <body ng-controller="MainCtrl">
 
@@ -15,7 +36,11 @@
 <p>Data: {{data}}</p>
 <p>Selected: {{selected}}</p>
 
-<tag-me type="input" data="data" selected="selected" allow-outside-data-set="false" same-input="false">test</tag-me>
+<tag-me type="input" data="data" selected="selected" theme="material"  allow-outside-data-set="true" same-input="false">test</tag-me>
+
+<p>Selected: {{selectedi}}</p>
+<tag-me type="input" data="data" selected="selectedi"  allow-outside-data-set="true" same-input="false">test</tag-me>
+
 
 </body>
 </html>
