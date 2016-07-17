@@ -179,7 +179,11 @@
 
                 $scope.hasError=true;
                 console.error("Error, Existing before in our output , or not among data set");
-            }
+            };
+
+        $scope.remove=function (item) {
+          $scope.selected=$filter('filter')($scope.selected, function(value, index) {return value !== item;});
+        };
 
     };
 
@@ -202,13 +206,30 @@
             },
             controller: controllerFunction, //Embed a custom controller in the directive
             link: function ($scope, element, attrs) {
-                
+
+            } //DOM manipulation
+        };
+    };
+
+    /**
+     * This directive helps to manipulate the text input to make it focusable
+     * @returns {{restrict: string, link: link}}
+     */
+    var directive_focus=function () {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attrs) {
+                scope.$watch(attrs.focusMe, function(value) {
+                    if(value === true)
+                        element[0].focus();
+                });
             } //DOM manipulation
         };
     };
 
     angular.module('angular-tag',[])
         .directive('tagMe', directive)
+        .directive('focusMe',directive_focus)
         .controller('MainCtrl',function ($scope) {
             $scope.data=[{text:'Jss1',added:'test'},{text:'Jss2',add:'test3'},{text:'Jss3',value:'owk'}];
             $scope.selected=[];
