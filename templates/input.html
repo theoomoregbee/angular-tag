@@ -1,6 +1,9 @@
 <style type="text/css">
 
-    /*http://css.maxdesign.com.au/listutorial/horizontal_master.htm*/
+    /* Thanks for Ul Styling
+    http://css.maxdesign.com.au/listutorial/horizontal_master.htm
+    https://css-tricks.com/snippets/css/glowing-blue-input-highlights/
+    */
 
    .tag-container .error {
         color: red;
@@ -8,15 +11,50 @@
     .tag-container ul
     {
         margin: 0;
-        padding: 0;
         list-style-type: none;
+        border: 1px solid #DDDDDD;
+        padding: 3px 0px 3px 3px;
+        -webkit-transition: all 0.30s ease-in-out;
+        -moz-transition: all 0.30s ease-in-out;
+        -ms-transition: all 0.30s ease-in-out;
+        -o-transition: all 0.30s ease-in-out;
         /*text-align: center;*/
     }
 
+    .tag-container .tag.default.focus{
+        box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+        padding: 3px 0px 3px 3px;
+        margin: 5px 1px 3px 0px;
+        border: 1px solid rgba(81, 203, 238, 1);
+    }
+
+    /*Material Design Input*/
+    .tag-container ul.material {
+        padding: 3px 0px 3px 3px;
+        border: none;
+        border-bottom: solid 2px #c9c9c9;
+        transition: border 0.3s ease-in-out;
+    }
+
+    .tag-container ul.tag.material.focus {
+         box-shadow: none;
+         padding: 3px 0px 3px 3px;
+         /*border: 1px solid rgba(81, 203, 238, 1);*/
+        border-bottom: solid 2px #969696;
+    }
+    /*End Material Design input*/
+
+
+
+
     .tag-container ul li { display: inline; }
 
-    .tag-container ul li input, .tag-container ul li input:focus{
+    .tag-container ul li input, .tag-container ul li input:focus, .tag-container ul li input:active{
         border:none;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        outline: none;
+        background: transparent;
     }
 
     .tag-container ul li a
@@ -32,17 +70,18 @@
         color: #fff;
         background-color: #369;
     }
-    /*http://css.maxdesign.com.au/listutorial/horizontal_master.htm*/
+
+
 </style>
 <p>this is for input file type For File:{{type}}</p>
 
 <div class="tag-container">
- <ul class="tag">
+ <ul ng-class="['tag',{focus:isFocus},theme ]" >
     <li ng-repeat="select in selected">
        <a href="javascript:void()"> {{select.text}}</a>
     </li>
 <li>
-    <input ng-class="{error:hasError}" ng-model="input" ng-keyup="on_input_keyup($event)"  style="" type="input" placeholder="Enter Text with , separated" >
+    <input ng-class="{error:hasError}" ng-model="input" ng-keyup="on_input_keyup($event)" ng-focus="isFocus=true" ng-blur="isFocus=false"  style="" type="input" placeholder="Enter Text with , separated" >
 </li>
  </ul>
 

@@ -1,0 +1,20 @@
+<!DOCTYPE html >
+<html lang="en" ng-app="angular-tag">
+<head>
+    <meta charset="UTF-8">
+    <title>Tag Test</title>
+<script src="bower_components/angular/angular.js"></script>
+<script src="angular-tag.js"></script>
+
+</head>
+<body ng-controller="MainCtrl">
+
+<p>Tag Me</p>
+
+<p>Data: {{data}}</p>
+<p>Selected: {{selected}}</p>
+
+<tag-me type="input" data="data" selected="selected" allow-outside-data-set="false" same-input="false">test</tag-me>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "angular-tag",
+  "version": "1.0.0",
+  "description": "Angular Tagging, to tag inputs",
+  "main": "angular-tag.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "tag",
+    "tagging",
+    "angular",
+    "bootstrap"
+  ],
+  "author": "Theophilus Omoregbee <theo4u@ymail.com>",
+  "license": "ISC"
+}
