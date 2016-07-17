@@ -205,8 +205,7 @@
                 return 'templates/'+attr.type+'.html';
             },
             controller: controllerFunction, //Embed a custom controller in the directive
-            link: function ($scope, element, attrs) {
-
+            link: function ($scope, element, attrs) { 
             } //DOM manipulation
         };
     };
