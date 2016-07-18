@@ -152,3 +152,16 @@
     background-color: #337ab7;
     outline: 0;
 }
+
+#main-tag {
+    /* width: 33.33%;
+     float: left;*/
+    position: relative; /* <-- added declaration */
+}
+
+#main-tag ul.tag-typehead {
+    position: absolute;  /* <-- added declarations */
+    left: 0; top: 100%;  /*     here               */
+    width: 100%;         /*     and here...        */
+    z-index: 999;
+}
