@@ -80,7 +80,6 @@ gulp.task('clean-css', function () {
 gulp.task('watch', function(){
     gulp.watch('*.js', ['build-js']);
     gulp.watch('*.css', ['build-css']);
-    gulp.watch('**/*.html', ['webserver']);
 });
 
 gulp.task("serve",['watch','webserver']);

@@ -26,6 +26,8 @@
  *          2. tagRemoved is emitted with the removed item to the parent Scope
  *
  *  Type Head features
+ *         1. normal type head which is based on the data set , as user types it opens the type head for assistance
+ *             it is triggered by default, users can decide to off it , by turning it to false
  */
 
 (function () {
@@ -58,6 +60,7 @@
         $scope.sameInput=data_init($scope.sameInput,false);
         $scope.default_input={text:''};//default view when a new object is added i.e when
         $scope.theme=data_init($scope.theme,'default');
+        $scope.typehead=data_init($scope.typehead,true);//used in displaying type head or not
 
         /**
          * This method checks if an item(input) exist inside an array
@@ -210,7 +213,8 @@
                 data: '=',//if set , is where we use in our data set to check if the entered item match any of the fields/items in it
                 selected:'=',//return the selected item(s)/tags here
                 sameInput:'=',//to allow same input , that is a selected item can appear more than once in our tagging system
-                allowOutsideDataSet:'='//if the allowed input should be outside the data set specified
+                allowOutsideDataSet:'=',//if the allowed input should be outside the data set specified
+                typehead:'='//used in turning type head to assist users when typing or not
             },
             templateUrl: function(elem, attr){
                 return 'templates/'+attr.type+'.html';
@@ -237,9 +241,9 @@
         };
     };
 
-    angular.module('angular-tag',[])
-        .directive('tagMe', [directive])
-        .directive('focusMe',[directive_focus])
+    angular.module('angular-tag',['ngAnimate'])
+        .directive('tagMe', directive)
+        .directive('focusMe',directive_focus)
 
 }());
 
