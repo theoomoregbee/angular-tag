@@ -2,7 +2,7 @@
 <div class="tag-container">
  <ul ng-class="['tag',{focus:isFocus},theme ]" ng-click="isFocus=true">
     <li ng-repeat="select in selected">
-      {{select.text}}  <a href="javascript:void(0)" ng-click="remove(select)">&times;</a>
+      {{select[displayField]}}  <a href="javascript:void(0)" ng-click="remove(select)">&times;</a>
     </li>
 <li>
     <input ng-class="{error:hasError}" ng-model="input" ng-keyup="on_input_keyup($event)" ng-focus="isFocus=true" ng-blur="isFocus=false" focus-me="isFocus"
@@ -13,11 +13,10 @@
 
 <ul class="tag-typehead" ng-show="input.length && typehead && results.length" >
     <li class="animate-repeat" ng-repeat="item in data | filter:input as results">
-       <a href="javascript:void(0)" ng-click="processor(item.text)">{{item.text}}</a>
+       <a href="javascript:void(0)" ng-click="processor(item[displayField])">{{item[displayField]}}</a>
     </li>
     <!--<li class="animate-repeat" ng-if="results.length == 0">
         <strong>No results found...</strong>
     </li>-->
 </ul>
-
 </div>
