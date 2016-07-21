@@ -62,6 +62,7 @@
         $scope.theme=data_init($scope.theme,'default');
         $scope.typehead=data_init($scope.typehead,true);//used in displaying type head or not
         $scope.displayField=data_init($scope.displayField,'text');//used in displaying which field inside the data set we need
+        $scope.placeholder=data_init($scope.placeholder,'Enter Text with , separated');//this is helps for custom placeholder
         /**
          * This method checks if an item(input) exist inside an array
          * @param array
@@ -119,7 +120,7 @@
          */
         $scope.return_value=function (data_check,input) {
             if(data_check == undefined){
-                $scope.default_input.text=input;
+                $scope.default_input[""+$scope.displayField]=input;
                 return $scope.default_input;
             }else
                return data_check;//means is on our data set , so pick the item from there
@@ -215,11 +216,11 @@
                 sameInput:'=',//to allow same input , that is a selected item can appear more than once in our tagging system
                 allowOutsideDataSet:'=',//if the allowed input should be outside the data set specified
                 typehead:'=',//used in turning type head to assist users when typing or not
-                displayField:'@'//field to display to the user in the data set to the tag view
+                displayField:'@',//field to display to the user in the data set to the tag view
+                placeholder:'@'//assist users so they can use their place holders , if not placed it wud use the default
             },
             templateUrl: function(elem, attr){
-             // return 'templates/'+attr.type+'.html';
-                return attr.type+'.html';
+                return 'angular-tag/templates/'+attr.type+'.html';
             },
             controller: controllerFunction, //Embed a custom controller in the directive
             link: function ($scope, element, attrs) {
@@ -243,9 +244,7 @@
         };
     };
 
-    angular.module('angular-tag',['ngAnimate'])
+    angular.module('angular-tag',['ngAnimate','angular-tag/templates'])
         .directive('tagMe', directive)
-        .directive('focusMe',directive_focus)
-        .run(['$templateCache', function($templateCache) {$templateCache.put('input.html','<div id="main-tag">\r\n<div class="tag-container">\r\n <ul ng-class="[\'tag\',{focus:isFocus},theme ]" ng-click="isFocus=true">\r\n    <li ng-repeat="select in selected">\r\n      {{select[displayField]}}  <a href="javascript:void(0)" ng-click="remove(select)">&times;</a>\r\n    </li>\r\n<li>\r\n    <input ng-class="{error:hasError}" ng-model="input" ng-keyup="on_input_keyup($event)" ng-focus="isFocus=true" ng-blur="isFocus=false" focus-me="isFocus"\r\n         type="input" placeholder="Enter Text with , separated"  >\r\n</li>\r\n </ul>\r\n</div>\r\n\r\n<ul class="tag-typehead" ng-show="input.length && typehead && results.length" >\r\n    <li class="animate-repeat" ng-repeat="item in data | filter:input as results">\r\n       <a href="javascript:void(0)" ng-click="processor(item[displayField])">{{item[displayField]}}</a>\r\n    </li>\r\n    <!--<li class="animate-repeat" ng-if="results.length == 0">\r\n        <strong>No results found...</strong>\r\n    </li>-->\r\n</ul>\r\n</div>');}]);
+        .directive('focusMe',directive_focus) ;
 }());
-

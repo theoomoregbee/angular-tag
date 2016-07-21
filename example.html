@@ -5,15 +5,15 @@
     <title>Tag Test</title>
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-animate/angular-animate.js"></script>
-<script src="angular-tag.js"></script>
-<link rel="stylesheet" href="min/angular-tag.min.css">
+<script src="dist/angular-tag.js"></script>
+<link rel="stylesheet" href="dist/angular-tag.min.css">
 </link>
 
    <script >
        angular.module('example',['angular-tag'])
 
          .controller('MainCtrl',function ($scope) {
-    $scope.data=[{text:'Jss1',added:'test'},{text:'Jss2',add:'test3'},{text:'Jss3',value:'owk'}];
+    $scope.data=[{texti:'Jss1',added:'test'},{texti:'Jss2',add:'test3'},{texti:'Jss3',value:'owk'}];
     $scope.selected=[];
 
     $scope.$on('tagAdded', function (event, data) {
@@ -37,10 +37,10 @@
 <p>Data: {{data}}</p>
 <p>Selected: {{selected}}</p>
 
-<tag-me type="input" data="data" selected="selected" typehead="true" theme="material"  allow-outside-data-set="true" same-input="false">test</tag-me>
+<tag-me type="input" data="data" selected="selected" display-field="texti" typehead="true" theme="material"  allow-outside-data-set="true" same-input="false">test</tag-me>
 
 <p>Selected: {{selectedi}}</p>
-<tag-me type="input" data="data" selected="selectedi" typehead="false" allow-outside-data-set="true" same-input="false">test</tag-me>
+<tag-me type="input" data="data" selected="selectedi" display-field="texti" typehead="false" allow-outside-data-set="true" same-input="false">test</tag-me>
 
 
 </body>

@@ -6,12 +6,12 @@
     </li>
 <li>
     <input ng-class="{error:hasError}" ng-model="input" ng-keyup="on_input_keyup($event)" ng-focus="isFocus=true" ng-blur="isFocus=false" focus-me="isFocus"
-         type="input" placeholder="Enter Text with , separated"  >
+         type="input" placeholder="{{placeholder}}"  >
 </li>
  </ul>
 </div>
 
-<ul class="tag-typehead" ng-show="input.length && typehead && results.length" >
+<ul class="tag-typehead" ng-show="input.length && typehead && results.length " >
     <li class="animate-repeat" ng-repeat="item in data | filter:input as results">
        <a href="javascript:void(0)" ng-click="processor(item[displayField])">{{item[displayField]}}</a>
     </li>
