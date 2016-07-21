@@ -58,7 +58,7 @@
         $scope.selected=data_init($scope.selected,[]);
         $scope.allowOutsideDataSet=data_init($scope.allowOutsideDataSet,false);
         $scope.sameInput=data_init($scope.sameInput,false);
-        $scope.default_input={text:''};//default view when a new object is added i.e when
+        $scope.default_input={};//default view when a new object is added i.e when
         $scope.theme=data_init($scope.theme,'default');
         $scope.typehead=data_init($scope.typehead,true);//used in displaying type head or not
         $scope.displayField=data_init($scope.displayField,'text');//used in displaying which field inside the data set we need
