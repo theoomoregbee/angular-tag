@@ -55,7 +55,7 @@
      * @param $scope
      * @param $filter
      */
-    var controllerFunction=function ($scope,$filter) {
+    var controllerFunction=function ($scope,$filter,$log) {
         $scope.hasError=false;//when there is error while entrying record
         $scope.delimiter=",";
         $scope.data = data_init($scope.data,[]);
@@ -106,7 +106,7 @@
          //let's check if the user pressed the backspace button so we know when to enter the tag after the input i.e activate the tag as active
          //and check if the backspace is pressed and nothing to backspace then move to our last added tag
             if(event.keyCode == 8 && input.slice(0,$scope.getCursorPosition(event.target)) == "" ){
-                console.info("backspace activated");
+               // $log.info("backspace activated");
                 var last_index=$scope.selected.length-1;
                 //if backspace is clicked twice with input empty delete
                 if(last_index == $scope.active_index) {
@@ -301,7 +301,7 @@
                 }
 
                 $scope.hasError=true;
-                console.error("Error, Existing before in our output , or not among data set");
+                $log.error("Error, Existing before in our output , or not among data set");
             };
 
         /**
@@ -318,7 +318,7 @@
 
 
     //inject into our controller required dependencies
-    controllerFunction.$inject=['$scope','$filter'];
+    controllerFunction.$inject=['$scope','$filter','$log'];
 
 
     var directive = function () { 
