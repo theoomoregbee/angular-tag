@@ -123,7 +123,7 @@
 .tag-container ul li:not(:last-child).active
 {
     color: #fff;
-    background-color: rgb(8, 9, 46);
+    background-color: #777272;
     font-size:85%;
     font-weight: 700;
 }

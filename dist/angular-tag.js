@@ -127,6 +127,7 @@
             }
 
         };
+        
         /**
          * This method is to help navigate between or added tags when the key arrow left and right is pressed
          * and this works with only the keypress down event
