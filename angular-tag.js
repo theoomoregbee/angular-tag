@@ -25,6 +25,10 @@
  *          1. tagAdded is emitted with the added item to the parent scope
  *          2. tagRemoved is emitted with the removed item to the parent Scope
  *
+ * You can delete tag by Either
+ *          1. Backspace
+ *          2. Delete
+ *
  *  Type Head features
  *         1. normal type head which is based on the data set , as user types it opens the type head for assistance
  *             it is triggered by default, users can decide to off it , by turning it to false
@@ -123,6 +127,31 @@
             }
 
         };
+        /**
+         * This method is to help navigate between or added tags when the key arrow left and right is pressed
+         * and this works with only the keypress down event
+         * @param event
+         */
+    $scope.on_input_keydown=function (event) {
+        var input='';
+        if($scope.input != undefined)
+            input=$scope.input.replace($scope.delimiter,'');
+
+        //when user press the directional key left check if the cursor position is at the extreme left of the input field
+        if(event.keyCode == 37 && $scope.getCursorPosition(event.target) == 0){
+            var last_index = ($scope.active_index==-1)|| ($scope.active_index==0)?($scope.selected.length-1):($scope.active_index-1);
+            $scope.moveToTag(event,last_index);
+            return;
+        }
+
+        //when user press the directional key right check if the cursor position is at the extreme right of the input field
+        if(event.keyCode == 39 && $scope.getCursorPosition(event.target) == input.length){
+            var first_index = ($scope.active_index==-1) || ($scope.active_index==($scope.selected.length-1))?(0):($scope.active_index+1);
+            $scope.moveToTag(event,first_index);
+            return;
+        }
+
+          };
 
         /**
          * Thanks to Dasari Srinivas http://blog.sodhanalibrary.com/2015/02/get-cursor-position-in-text-input-field.html#.V5Ly47grK00

@@ -1,11 +1,11 @@
 <div id="main-tag">
 <div class="tag-container">
- <ul ng-class="['tag',{focus:isFocus},theme ]" ng-click="isFocus=true">
+ <ul ng-class="['tag',{focus:isFocus},theme ]" ng-click="isFocus=true" ng-keydown="direction_keys($event)">
     <li ng-repeat="select in selected" ng-click="(moveToTag($event,$index)) ">
       {{select[displayField]}}  <a href="javascript:void(0)" ng-click="remove(select)">&times;</a>
     </li>
 <li>
-    <input ng-class="{error:hasError}" ng-model="input" ng-keyup="on_input_keyup($event)" ng-focus="isFocus=true" ng-blur="isFocus=false" focus-me="isFocus"
+    <input ng-class="{error:hasError}" ng-model="input" ng-keyup="on_input_keyup($event)" ng-keydown="on_input_keydown($event)" ng-focus="isFocus=true" ng-blur="isFocus=false" focus-me="isFocus"
          type="input" placeholder="{{placeholder}}"  >
 </li>
  </ul>
