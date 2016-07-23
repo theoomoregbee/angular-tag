@@ -100,11 +100,10 @@
            // console.info(event);
          //let's check if the user pressed the backspace button so we know when to enter the tag after the input i.e activate the tag as active
             if(event.keyCode == 8 && input==""){
-                //enter the newly add tag as active
+                //make the last add tag as active
                console.info("backspace activated");
-                //move to the last one
-                $scope.moveToTag(event,$scope.selected.length-1);
-                
+                $scope.moveToTag(event,$scope.selected.length-1);//-1 means move the tag to the last tag
+
             }
 
             //keyCOde==46 for delete
@@ -147,9 +146,10 @@
             var lis=angular.element(event.target.parentNode.parentNode).find('li');
             var size=lis.length;
             for(var i=0; i<size-1;i++){
-                if(i==index)
-                    angular.element(lis[i]).addClass('active');
-                else
+                if(i==index) {
+                    //check if it contains active before then toggle
+                    angular.element(lis[i]).toggleClass('active');
+                }else
                     angular.element(lis[i]).removeClass('active');
             }
         };
