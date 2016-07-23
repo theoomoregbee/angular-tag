@@ -4,6 +4,10 @@
   bootstrap material for animation on click
   */
 
+.tag-container{
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+
 .tag-container .error {
     color: red;
 }
@@ -108,10 +112,18 @@
     display: inline-block;
 }
 
-.tag-container ul li:not(:last-child):hover,.tag-container ul li:not(:last-child).active
+.tag-container ul li:not(:last-child):hover
 {
     color: #fff;
     background-color: rgb(8,152,89);
+    font-size:85%;
+    font-weight: 700;
+}
+
+.tag-container ul li:not(:last-child).active
+{
+    color: #fff;
+    background-color: rgb(8, 9, 46);
     font-size:85%;
     font-weight: 700;
 }

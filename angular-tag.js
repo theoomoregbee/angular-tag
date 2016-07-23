@@ -63,6 +63,8 @@
         $scope.typehead=data_init($scope.typehead,true);//used in displaying type head or not
         $scope.displayField=data_init($scope.displayField,'text');//used in displaying which field inside the data set we need
         $scope.placeholder=data_init($scope.placeholder,'Enter Text with , separated');//this is helps for custom placeholder
+
+
         /**
          * This method checks if an item(input) exist inside an array
          * @param array
@@ -90,12 +92,22 @@
             }
 
             //if user types and presses enter key (keyCode 13 ASCII)
-            if(event.keyCode==13) {
-                if(input!="")
+            if(event.keyCode == 13 && input != "" ) {
                    $scope.processor(input);
                 return;
             }
 
+           // console.info(event);
+         //let's check if the user pressed the backspace button so we know when to enter the tag after the input i.e activate the tag as active
+            if(event.keyCode == 8 && input==""){
+                //enter the newly add tag as active
+               console.info("backspace activated");
+                //move to the last one
+                $scope.moveToTag(event,$scope.selected.length-1);
+                
+            }
+
+            //keyCOde==46 for delete
 
         };
 
@@ -124,6 +136,22 @@
                 return $scope.default_input;
             }else
                return data_check;//means is on our data set , so pick the item from there
+        };
+
+        /**
+         * This method moves the cursor to the tag in a particular index  of our event which holds the parent and set it to be active
+         * @param index
+         */
+        $scope.moveToTag = function (event,index) {
+            var i=0;
+            var lis=angular.element(event.target.parentNode.parentNode).find('li');
+            var size=lis.length;
+            for(var i=0; i<size-1;i++){
+                if(i==index)
+                    angular.element(lis[i]).addClass('active');
+                else
+                    angular.element(lis[i]).removeClass('active');
+            }
         };
         
         /**
@@ -244,7 +272,14 @@
         };
     };
 
-    angular.module('angular-tag',['ngAnimate','angular-tag/templates'])
-        .directive('tagMe', directive)
+   /* //make ngAnimate to be optional
+    var module=angular.module('angular-tag',['angular-tag/templates']);
+    try{
+        module=angular.module('angular-tag',['ngAnimate','angular-tag/templates'])
+    }catch(e){
+        console.error(e);
+    }*/
+   var module=angular.module('angular-tag',['ngAnimate','angular-tag/templates']);
+    module.directive('tagMe', directive)
         .directive('focusMe',directive_focus) ;
 }());

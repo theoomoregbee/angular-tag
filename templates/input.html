@@ -1,7 +1,7 @@
 <div id="main-tag">
 <div class="tag-container">
  <ul ng-class="['tag',{focus:isFocus},theme ]" ng-click="isFocus=true">
-    <li ng-repeat="select in selected">
+    <li ng-repeat="select in selected" ng-click="moveToTag($event,$index)">
       {{select[displayField]}}  <a href="javascript:void(0)" ng-click="remove(select)">&times;</a>
     </li>
 <li>

@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="dist/angular-tag.min.css">
 </link>
 
-   <script >
+   <script>
        angular.module('example',['angular-tag'])
 
          .controller('MainCtrl',function ($scope) {
@@ -23,14 +23,17 @@
     $scope.$on('tagRemoved', function (event, data) {
     console.log(data); // 'Some data'
     console.log(event);
+        console.log($scope.selected)
     });
+
+
 
     })
    </script>
     
     
 </head>
-<body ng-controller="MainCtrl">
+<body ng-controller="MainCtrl" >
 
 <p>Tag Me</p>
 
