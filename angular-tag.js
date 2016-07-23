@@ -101,9 +101,17 @@
            // console.info(event);
          //let's check if the user pressed the backspace button so we know when to enter the tag after the input i.e activate the tag as active
             if(event.keyCode == 8 && input==""){
+                console.info("backspace activated");
+                var last_index=$scope.selected.length-1;
+                //if backspace is clicked twice with input empty delete
+                if(last_index == $scope.active_index) {
+                    $scope.remove($scope.selected[$scope.active_index]);
+                    last_index = -1;
+                }
+
                 //make the last add tag as active
                console.info("backspace activated");
-                $scope.moveToTag(event,$scope.selected.length-1);//-1 means move the tag to the last tag
+                $scope.moveToTag(event,last_index);//-1 means move the tag to the last tag
             }
 
             //keyCOde==46 for delete
@@ -231,6 +239,7 @@
          */
         $scope.remove=function (item) {
           $scope.selected=$filter('filter')($scope.selected, function(value, index) {return value !== item;});
+            $scope.active_index=-1;
             $scope.$emit('tagRemoved',item);
         };
 
