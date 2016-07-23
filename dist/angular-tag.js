@@ -64,6 +64,7 @@
         $scope.displayField=data_init($scope.displayField,'text');//used in displaying which field inside the data set we need
         $scope.placeholder=data_init($scope.placeholder,'Enter Text with , separated');//this is helps for custom placeholder
 
+        $scope.active_index=-1;//this hold the active selected tag index
 
         /**
          * This method checks if an item(input) exist inside an array
@@ -103,7 +104,6 @@
                 //make the last add tag as active
                console.info("backspace activated");
                 $scope.moveToTag(event,$scope.selected.length-1);//-1 means move the tag to the last tag
-
             }
 
             //keyCOde==46 for delete
@@ -148,7 +148,13 @@
             for(var i=0; i<size-1;i++){
                 if(i==index) {
                     //check if it contains active before then toggle
-                    angular.element(lis[i]).toggleClass('active');
+                    if($scope.active_index != index) {
+                        $scope.active_index = index;
+                        angular.element(lis[i]).addClass('active');
+                    }else{
+                        $scope.active_index = -1;
+                        angular.element(lis[i]).removeClass('active');
+                    }
                 }else
                     angular.element(lis[i]).removeClass('active');
             }
