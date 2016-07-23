@@ -98,7 +98,7 @@
                 return;
             }
 
-           // console.info(event);
+
          //let's check if the user pressed the backspace button so we know when to enter the tag after the input i.e activate the tag as active
             if(event.keyCode == 8 && input==""){
                 console.info("backspace activated");
@@ -110,13 +110,20 @@
                 }
 
                 //make the last add tag as active
-               console.info("backspace activated");
+                console.info("backspace activated");
                 $scope.moveToTag(event,last_index);//-1 means move the tag to the last tag
+                return;
             }
 
             //keyCOde==46 for delete
+            //when the user clicked on the delete button removed the active one
+            if(event.keyCode == 46 && input==""){
+                $scope.remove($scope.selected[$scope.active_index]);
+            return;
+            }
 
         };
+ 
 
         /**
          * this method updates our tag view with the input parameter, and emit a message to the parent that an object is gotten

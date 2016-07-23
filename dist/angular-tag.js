@@ -98,7 +98,7 @@
                 return;
             }
 
-           // console.info(event);
+
          //let's check if the user pressed the backspace button so we know when to enter the tag after the input i.e activate the tag as active
             if(event.keyCode == 8 && input==""){
                 console.info("backspace activated");
@@ -110,13 +110,20 @@
                 }
 
                 //make the last add tag as active
-               console.info("backspace activated");
+                console.info("backspace activated");
                 $scope.moveToTag(event,last_index);//-1 means move the tag to the last tag
+                return;
             }
 
             //keyCOde==46 for delete
+            //when the user clicked on the delete button removed the active one
+            if(event.keyCode == 46 && input==""){
+                $scope.remove($scope.selected[$scope.active_index]);
+            return;
+            }
 
         };
+ 
 
         /**
          * this method updates our tag view with the input parameter, and emit a message to the parent that an object is gotten
@@ -298,4 +305,4 @@
     module.directive('tagMe', directive)
         .directive('focusMe',directive_focus) ;
 }());
-angular.module('angular-tag/templates', []).run(['$templateCache', function($templateCache) {$templateCache.put('angular-tag/templates/input.html','<div id="main-tag">\r\n<div class="tag-container">\r\n <ul ng-class="[\'tag\',{focus:isFocus},theme ]" ng-click="isFocus=true">\r\n    <li ng-repeat="select in selected" ng-click="moveToTag($event,$index)">\r\n      {{select[displayField]}}  <a href="javascript:void(0)" ng-click="remove(select)">&times;</a>\r\n    </li>\r\n<li>\r\n    <input ng-class="{error:hasError}" ng-model="input" ng-keyup="on_input_keyup($event)" ng-focus="isFocus=true" ng-blur="isFocus=false" focus-me="isFocus"\r\n         type="input" placeholder="{{placeholder}}"  >\r\n</li>\r\n </ul>\r\n</div>\r\n\r\n<ul class="tag-typehead" ng-show="input.length && typehead && results.length " >\r\n    <li class="animate-repeat" ng-repeat="item in data | filter:input as results">\r\n       <a href="javascript:void(0)" ng-click="processor(item[displayField])">{{item[displayField]}}</a>\r\n    </li>\r\n    <!--<li class="animate-repeat" ng-if="results.length == 0">\r\n        <strong>No results found...</strong>\r\n    </li>-->\r\n</ul>\r\n</div>');}]);
+angular.module('angular-tag/templates', []).run(['$templateCache', function($templateCache) {$templateCache.put('angular-tag/templates/input.html','<div id="main-tag">\r\n<div class="tag-container">\r\n <ul ng-class="[\'tag\',{focus:isFocus},theme ]" ng-click="isFocus=true">\r\n    <li ng-repeat="select in selected" ng-click="(moveToTag($event,$index)) ">\r\n      {{select[displayField]}}  <a href="javascript:void(0)" ng-click="remove(select)">&times;</a>\r\n    </li>\r\n<li>\r\n    <input ng-class="{error:hasError}" ng-model="input" ng-keyup="on_input_keyup($event)" ng-focus="isFocus=true" ng-blur="isFocus=false" focus-me="isFocus"\r\n         type="input" placeholder="{{placeholder}}"  >\r\n</li>\r\n </ul>\r\n</div>\r\n\r\n<ul class="tag-typehead" ng-show="input.length && typehead && results.length " >\r\n    <li class="animate-repeat" ng-repeat="item in data | filter:input as results">\r\n       <a href="javascript:void(0)" ng-click="processor(item[displayField])">{{item[displayField]}}</a>\r\n    </li>\r\n    <!--<li class="animate-repeat" ng-if="results.length == 0">\r\n        <strong>No results found...</strong>\r\n    </li>-->\r\n</ul>\r\n</div>');}]);
