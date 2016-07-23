@@ -100,7 +100,8 @@
 
 
          //let's check if the user pressed the backspace button so we know when to enter the tag after the input i.e activate the tag as active
-            if(event.keyCode == 8 && input==""){
+         //and check if the backspace is pressed and nothing to backspace then move to our last added tag
+            if(event.keyCode == 8 && input.slice(0,$scope.getCursorPosition(event.target)) == "" ){
                 console.info("backspace activated");
                 var last_index=$scope.selected.length-1;
                 //if backspace is clicked twice with input empty delete
@@ -109,21 +110,54 @@
                     last_index = -1;
                 }
 
-                //make the last add tag as active
-                console.info("backspace activated");
                 $scope.moveToTag(event,last_index);//-1 means move the tag to the last tag
                 return;
             }
 
-            //keyCOde==46 for delete
-            //when the user clicked on the delete button removed the active one
-            if(event.keyCode == 46 && input==""){
+             
+            //when the user clicked on the delete button removed the active one and if the input field delete action is dummant i.e
+            //when user press it no text to remove from behind again
+            if(event.keyCode == 46 && input.slice($scope.getCursorPosition(event.target),input.length) == ""){
                 $scope.remove($scope.selected[$scope.active_index]);
             return;
             }
 
         };
- 
+
+        /**
+         * Thanks to Dasari Srinivas http://blog.sodhanalibrary.com/2015/02/get-cursor-position-in-text-input-field.html#.V5Ly47grK00
+         *  This method helps in getting the cursor position in our text field so we can check if there was something
+         * @param oField which is the html field our text field in this case
+         * @returns {number}
+         */
+        $scope.getCursorPosition=function(oField) {
+
+            // Initialize
+            var iCaretPos = 0;
+
+            // IE Support
+            if (document.selection) {
+
+                // Set focus on the element
+                oField.focus ();
+
+                // To get cursor position, get empty selection range
+                var oSel = document.selection.createRange ();
+
+                // Move selection start to 0 position
+                oSel.moveStart ('character', -oField.value.length);
+
+                // The caret position is selection length
+                iCaretPos = oSel.text.length;
+            }
+
+            // Firefox support
+            else if (oField.selectionStart || oField.selectionStart == '0')
+                iCaretPos = oField.selectionStart;
+
+            // Return results
+           return iCaretPos;
+        };
 
         /**
          * this method updates our tag view with the input parameter, and emit a message to the parent that an object is gotten
