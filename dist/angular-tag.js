@@ -327,7 +327,7 @@
             restrict: 'E',
             scope: {
                 type: '@',
-                theme:'@',//help to get theme to use in manipulating tag vie
+                theme:'@',//help to get theme to use in manipulating tag via
                 data: '=',//if set , is where we use in our data set to check if the entered item match any of the fields/items in it
                 selected:'=',//return the selected item(s)/tags here
                 sameInput:'=',//to allow same input , that is a selected item can appear more than once in our tagging system

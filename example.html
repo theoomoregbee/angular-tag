@@ -23,20 +23,14 @@
     $scope.$on('tagRemoved', function (event, data) {
     console.log(data); // 'Some data'
     console.log(event);
-        console.log($scope.selected)
+    console.log($scope.selected)
     });
-
-
 
     })
    </script>
-    
-    
 </head>
 <body ng-controller="MainCtrl" >
-
 <p>Tag Me</p>
-
 <p>Data: {{data}}</p>
 <p>Selected: {{selected}}</p>
 
@@ -44,7 +38,6 @@
 
 <p ng-init="selectedi=[{text:'Test'},{text:'three'}]">Selected: {{selectedi}}</p>
 <tag-me type="input" data="data" selected="selectedi" placeholder="your own placeholder"  typehead="false" allow-outside-data-set="true" same-input="false">test</tag-me>
-
 
 </body>
 </html>
