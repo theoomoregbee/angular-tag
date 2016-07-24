@@ -10,9 +10,9 @@
     "tag",
     "tagging",
     "angular",
-    "bootstrap"
+    "material"
   ],
-  "homepage": "",
+  "homepage": "https://github.com/theo4u/angular-tag",
   "ignore": [
     "**/.*",
     "node_modules",

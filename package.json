@@ -6,11 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theo4u/angular-tag.git"
+  },
   "keywords": [
     "tag",
     "tagging",
     "angular",
-    "bootstrap"
+    "material"
   ],
   "author": "Theophilus Omoregbee <theo4u@ymail.com>",
   "license": "ISC",
