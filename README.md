@@ -2,6 +2,8 @@
  
 Tags input directive for AngularJS. Check out the ReadMe on  [angular-tag website](https://github.com/theo4u/angular-tag) for more information.
 
+![angular-tag](https://www.googledrive.com/host/0B9WhZZgFzvoBLVhEd3hBRm5qb1k)
+
 ## Requirements
 
 - [Angular.js 1.3+](http://angularjs.org) 
