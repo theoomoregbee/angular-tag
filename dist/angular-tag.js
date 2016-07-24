@@ -32,6 +32,7 @@
  *  Type Head features
  *         1. normal type head which is based on the data set , as user types it opens the type head for assistance
  *             it is triggered by default, users can decide to off it , by turning it to false
+ *        2. For type head animation just inject ngAnimate
  */
 
 (function () {
@@ -361,7 +362,7 @@
     };
 
 
-   var module=angular.module('angular-tag',['ngAnimate','angular-tag/templates']);
+   var module=angular.module('angular-tag',['angular-tag/templates']);
     module.directive('tagMe', directive)
         .directive('focusMe',directive_focus) ;
 }());
