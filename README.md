@@ -1,11 +1,11 @@
 # angular-tag
  
-Tags input directive for AngularJS. Check out the [angular-tag website](http://mbenford.github.io/ngTagsInput) for more information.
+Tags input directive for AngularJS. Check out the ReadMe on  [angular-tag website](https://github.com/theo4u/angular-tag) for more information.
 
 ## Requirements
 
 - [Angular.js 1.3+](http://angularjs.org) 
-- [ngAnimate](http://angular-ui.github.io/bootstrap) (optional for typehead animation)
+- [ngAnimate](https://docs.angularjs.org/api/ngAnimate) (optional for typehead animation)
 
 ## Installation
 ### Add library
