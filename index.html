@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Angular-tag by theo4u</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Angular-tag</h1>
+      <h2 class="project-tagline">Tags input directive for AngularJS. </h2>
+      <a href="https://github.com/theo4u/angular-tag" class="btn">View on GitHub</a>
+      <a href="https://github.com/theo4u/angular-tag/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/theo4u/angular-tag/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="angular-tag" class="anchor" href="#angular-tag" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>angular-tag</h1>
+
+<p>Tags input directive for AngularJS. Check out the ReadMe on  <a href="https://github.com/theo4u/angular-tag">angular-tag website</a> for more information.</p>
+
+<p><img src="https://drive.google.com/open?id=0B9WhZZgFzvoBLVhEd3hBRm5qb1k" alt="angular-tag"></p>
+
+<h2>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements</h2>
+
+<ul>
+<li>
+<a href="http://angularjs.org">Angular.js 1.3+</a> </li>
+<li>
+<a href="https://docs.angularjs.org/api/ngAnimate">ngAnimate</a> (optional for typehead animation)</li>
+</ul>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<h3>
+<a id="add-library" class="anchor" href="#add-library" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Add library</h3>
+
+<p>This module is available as bower package, install it with this command:</p>
+
+<div class="highlight highlight-source-shell"><pre>bower install angular-tag</pre></div>
+
+<p>and it's available too as npm package, install it with this command:</p>
+
+<div class="highlight highlight-source-shell"><pre>npm install angular-tag</pre></div>
+
+<p>or you may download the <a href="https://github.com/theo4u/angular-tag/releases">latest release</a></p>
+
+<h3>
+<a id="include-library" class="anchor" href="#include-library" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Include library</h3>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">link</span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>/angular-tag/angular-tag.min.css<span class="pl-pds">"</span></span> <span class="pl-e">rel</span>=<span class="pl-s"><span class="pl-pds">"</span>stylesheet<span class="pl-pds">"</span></span> /&gt;
+&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>angular/angular.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;
+&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>/angular-tag/angular-tag.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre></div>
+
+<h3>
+<a id="add-dependency" class="anchor" href="#add-dependency" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Add dependency</h3>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> app <span class="pl-k">=</span> <span class="pl-smi">angular</span>.<span class="pl-en">module</span>(<span class="pl-s"><span class="pl-pds">'</span>myModule<span class="pl-pds">'</span></span>, [<span class="pl-s"><span class="pl-pds">'</span>angular-tag<span class="pl-pds">'</span></span>]);</pre></div>
+
+<h2>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h2>
+
+<p><code>/example.html</code></p>
+
+<div class="highlight highlight-text-html-basic"><pre>  &lt;!DOCTYPE html &gt;
+  &lt;<span class="pl-ent">html</span> <span class="pl-e">lang</span>=<span class="pl-s"><span class="pl-pds">"</span>en<span class="pl-pds">"</span></span> <span class="pl-e">ng-app</span>=<span class="pl-s"><span class="pl-pds">"</span>example<span class="pl-pds">"</span></span>&gt;
+  &lt;<span class="pl-ent">head</span>&gt;
+      &lt;<span class="pl-ent">meta</span> <span class="pl-e">charset</span>=<span class="pl-s"><span class="pl-pds">"</span>UTF-8<span class="pl-pds">"</span></span>&gt;
+      &lt;<span class="pl-ent">title</span>&gt;Tag Test&lt;/<span class="pl-ent">title</span>&gt;
+<span class="pl-s1">  &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>bower_components/angular/angular.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1">  &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>bower_components/angular-animate/angular-animate.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1">  &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>dist/angular-tag.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
+  &lt;<span class="pl-ent">link</span> <span class="pl-e">rel</span>=<span class="pl-s"><span class="pl-pds">"</span>stylesheet<span class="pl-pds">"</span></span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>dist/angular-tag.min.css<span class="pl-pds">"</span></span>&gt;
+  &lt;/<span class="pl-ent">link</span>&gt;
+
+<span class="pl-s1">     &lt;<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1">         <span class="pl-smi">angular</span>.<span class="pl-en">module</span>(<span class="pl-s"><span class="pl-pds">'</span>example<span class="pl-pds">'</span></span>,[<span class="pl-s"><span class="pl-pds">'</span>ngAnimate<span class="pl-pds">'</span></span>,<span class="pl-s"><span class="pl-pds">'</span>angular-tag<span class="pl-pds">'</span></span>])</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">           .<span class="pl-en">controller</span>(<span class="pl-s"><span class="pl-pds">'</span>MainCtrl<span class="pl-pds">'</span></span>,<span class="pl-k">function</span> (<span class="pl-smi">$scope</span>) {</span>
+<span class="pl-s1">      <span class="pl-smi">$scope</span>.<span class="pl-c1">data</span><span class="pl-k">=</span>[{texti<span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">'</span>Jss1<span class="pl-pds">'</span></span>,added<span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">'</span>test<span class="pl-pds">'</span></span>},{texti<span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">'</span>Jss2<span class="pl-pds">'</span></span>,add<span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">'</span>test3<span class="pl-pds">'</span></span>},{texti<span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">'</span>Jss3<span class="pl-pds">'</span></span>,value<span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">'</span>owk<span class="pl-pds">'</span></span>}];</span>
+<span class="pl-s1">      <span class="pl-smi">$scope</span>.<span class="pl-c1">selected</span><span class="pl-k">=</span>[];</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">      <span class="pl-smi">$scope</span>.<span class="pl-en">$on</span>(<span class="pl-s"><span class="pl-pds">'</span>tagAdded<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> (<span class="pl-c1">event</span>, <span class="pl-smi">data</span>) {</span>
+<span class="pl-s1">      <span class="pl-en">console</span>.<span class="pl-c1">log</span>(data); <span class="pl-c">// 'Some data'</span></span>
+<span class="pl-s1">      });</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">      <span class="pl-smi">$scope</span>.<span class="pl-en">$on</span>(<span class="pl-s"><span class="pl-pds">'</span>tagRemoved<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> (<span class="pl-c1">event</span>, <span class="pl-smi">data</span>) {</span>
+<span class="pl-s1">      <span class="pl-en">console</span>.<span class="pl-c1">log</span>(data); <span class="pl-c">// 'Some data'</span></span>
+<span class="pl-s1">      <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-c1">event</span>);</span>
+<span class="pl-s1">      <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-smi">$scope</span>.<span class="pl-c1">selected</span>)</span>
+<span class="pl-s1">      });</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">      })</span>
+<span class="pl-s1">     &lt;/<span class="pl-ent">script</span>&gt;</span>
+  &lt;/<span class="pl-ent">head</span>&gt;
+  &lt;<span class="pl-ent">body</span> <span class="pl-e">ng-controller</span>=<span class="pl-s"><span class="pl-pds">"</span>MainCtrl<span class="pl-pds">"</span></span> &gt;
+  &lt;<span class="pl-ent">p</span>&gt;Tag Me&lt;/<span class="pl-ent">p</span>&gt;
+  &lt;<span class="pl-ent">p</span>&gt;Data: {{data}}&lt;/<span class="pl-ent">p</span>&gt;
+  &lt;<span class="pl-ent">p</span>&gt;Selected: {{selected}}&lt;/<span class="pl-ent">p</span>&gt;
+
+  &lt;<span class="pl-ent">tag</span><span class="pl-e">-me</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>input<span class="pl-pds">"</span></span> <span class="pl-e">data</span>=<span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span> <span class="pl-e">selected</span>=<span class="pl-s"><span class="pl-pds">"</span>selected<span class="pl-pds">"</span></span> <span class="pl-e">display-field</span>=<span class="pl-s"><span class="pl-pds">"</span>texti<span class="pl-pds">"</span></span> <span class="pl-e">typehead</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> <span class="pl-e">theme</span>=<span class="pl-s"><span class="pl-pds">"</span>material<span class="pl-pds">"</span></span>  <span class="pl-e">allow-outside-data-set</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> <span class="pl-e">same-input</span>=<span class="pl-s"><span class="pl-pds">"</span>false<span class="pl-pds">"</span></span>&gt;test&lt;/<span class="pl-ent">tag</span><span class="pl-e">-me</span>&gt;
+
+  &lt;<span class="pl-ent">p</span> <span class="pl-e">ng-init</span>=<span class="pl-s"><span class="pl-pds">"</span>selectedi=[{text:'Test'},{text:'three'}]<span class="pl-pds">"</span></span>&gt;Selected: {{selectedi}}&lt;/<span class="pl-ent">p</span>&gt;
+  &lt;<span class="pl-ent">tag</span><span class="pl-e">-me</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>input<span class="pl-pds">"</span></span> <span class="pl-e">data</span>=<span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span> <span class="pl-e">selected</span>=<span class="pl-s"><span class="pl-pds">"</span>selectedi<span class="pl-pds">"</span></span> <span class="pl-e">placeholder</span>=<span class="pl-s"><span class="pl-pds">"</span>your own placeholder<span class="pl-pds">"</span></span>  <span class="pl-e">typehead</span>=<span class="pl-s"><span class="pl-pds">"</span>false<span class="pl-pds">"</span></span> <span class="pl-e">allow-outside-data-set</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> <span class="pl-e">same-input</span>=<span class="pl-s"><span class="pl-pds">"</span>false<span class="pl-pds">"</span></span>&gt;test&lt;/<span class="pl-ent">tag</span><span class="pl-e">-me</span>&gt;
+
+  &lt;/<span class="pl-ent">body</span>&gt;
+  &lt;/<span class="pl-ent">html</span>&gt;</pre></div>
+
+<h2>
+<a id="options" class="anchor" href="#options" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Options</h2>
+
+<p>The tag works separately with the options based on the value</p>
+
+<h3>
+<a id="theme" class="anchor" href="#theme" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>theme</h3>
+
+<pre><code>it comes with two themes which can take the value of `default` or `material`. if used optionally it takes
+ the default of `default`
+</code></pre>
+
+<h3>
+<a id="type" class="anchor" href="#type" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>type</h3>
+
+<pre><code>for the now the type is just for `input`
+</code></pre>
+
+<h3>
+<a id="data" class="anchor" href="#data" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>data</h3>
+
+<pre><code>if set , is where what `angular-tag` use in our data set to check if the entered item match any of the 
+fields/items in it or in filtering **typehead**
+</code></pre>
+
+<h3>
+<a id="selected" class="anchor" href="#selected" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>selected</h3>
+
+<pre><code>return the selected item(s)/tags here, which can be used for other processing
+</code></pre>
+
+<h3>
+<a id="sameinput" class="anchor" href="#sameinput" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>sameInput</h3>
+
+<pre><code>to allow same input , that is a selected item can appear more than once in our tagging system, 
+takes either `true` or `false`
+</code></pre>
+
+<h3>
+<a id="allowoutsidedataset" class="anchor" href="#allowoutsidedataset" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>allowOutsideDataSet</h3>
+
+<pre><code>if the allowed input should be outside the data set specified in `data` , takes either `true` or `false`
+</code></pre>
+
+<h3>
+<a id="typehead" class="anchor" href="#typehead" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>typehead</h3>
+
+<pre><code>used in turning type head to assist users when typing or not , takes either `true` or `false`, if animation is wanted 
+simply inject ngAnimate to your app module to see the type head in action
+</code></pre>
+
+<h3>
+<a id="displayfield" class="anchor" href="#displayfield" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>displayField</h3>
+
+<pre><code>field to display to the user in the data set to the tag view , i.e which field to show to the user 
+when typing or when adding tag, default if not specified uses the `text` object field parameter like in {text:'text'}
+</code></pre>
+
+<h3>
+<a id="placeholder" class="anchor" href="#placeholder" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>placeholder</h3>
+
+<pre><code>assist users so they can use their place holders , if not placed it would use the default placeholder which is 
+`Enter Text with , separated`
+</code></pre>
+
+<h3>
+<a id="delimeter" class="anchor" href="#delimeter" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>delimeter</h3>
+
+<pre><code>delimiter to separate the text entered, checks if the user hit on the delimiter activate the tag, default it uses `,` 
+and always uses `Enter Key` along side
+</code></pre>
+
+<h2>
+<a id="events" class="anchor" href="#events" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Events</h2>
+
+<p>The directive emits two events which is when a tag is added and when a tag is removed</p>
+
+<div class="highlight highlight-source-shell"><pre>        tagAdded //emitted with the added item to the parent scope
+        tagRemoved //emitted with the removed item to the parent Scope</pre></div>
+
+<p>Used in the example html above</p>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributing</h2>
+
+<h3>
+<a id="setting-up-your-environment" class="anchor" href="#setting-up-your-environment" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Setting up your environment</h3>
+
+<p>Here's what you need to do before start working on the code:</p>
+
+<ol>
+<li>Install Node.js (0.10.22 or higher)</li>
+<li>
+<p>Install <code>grunt-cli</code> globally</p>
+
+<pre><code>npm install -g grunt-cli karma-cli
+</code></pre>
+</li>
+<li>
+<p>Clone your repository</p>
+
+<pre><code>git clone https://github.com/&lt;your_github_username&gt;/angular-tag
+</code></pre>
+</li>
+<li>
+<p>Go to the angular-tag directory</p>
+
+<pre><code>cd angular-tag
+</code></pre>
+</li>
+<li>
+<p>Add the main angular-tag repo as an upstream remote</p>
+
+<pre><code>git remote add upstream https://github.com/theo4u/angular-tag
+</code></pre>
+</li>
+<li>
+<p>Install the development dependencies</p>
+
+<pre><code>npm install
+bower install 
+</code></pre>
+</li>
+</ol>
+
+<h3>
+<a id="building-from-the-source-code" class="anchor" href="#building-from-the-source-code" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Building from the source code</h3>
+
+<p>You can build angular-tag with a single command:</p>
+
+<pre><code>grunt build
+</code></pre>
+
+<p>That performs all tasks needed to produce the final JavaScript and CSS files. After the build completes, a folder named <code>dist</code> will be generated containing the following files:</p>
+
+<pre><code>angular-tag.js
+angular-tag.css
+angular-tag.min.js
+angular-tag.min.css
+</code></pre>
+
+<h3>
+<a id="running-it-on-local-server" class="anchor" href="#running-it-on-local-server" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Running It on local server</h3>
+
+<p>You can run it using the task below, which would run and watch any changes to our .js and .css and anything inside the <strong>template</strong> folder</p>
+
+<pre><code>grunt serve
+</code></pre>
+
+<p>The task above would run and listen for any js and run the <code>grunt build-js</code> or <code>grunt build-css</code> or <code>grunt template-build</code> for css and template respectively</p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
+
+<p>See the <a href="https://github.com/theo4u/angular-tag/blob/master/LICENSE">LICENSE</a> file.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/theo4u/angular-tag">Angular-tag</a> is maintained by <a href="https://github.com/theo4u">theo4u</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
