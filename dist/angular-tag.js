@@ -58,7 +58,7 @@
      */
     var controllerFunction=function ($scope,$filter,$log) {
         $scope.hasError=false;//when there is error while entrying record
-        $scope.delimiter=",";
+        $scope.delimiter=data_init($scope.delimiter,',');//used in specifying which separator to use or use default ,
         $scope.data = data_init($scope.data,[]);
         $scope.selected=data_init($scope.selected,[]);
         $scope.allowOutsideDataSet=data_init($scope.allowOutsideDataSet,false);
@@ -334,7 +334,8 @@
                 allowOutsideDataSet:'=',//if the allowed input should be outside the data set specified
                 typehead:'=',//used in turning type head to assist users when typing or not
                 displayField:'@',//field to display to the user in the data set to the tag view
-                placeholder:'@'//assist users so they can use their place holders , if not placed it wud use the default
+                placeholder:'@',//assist users so they can use their place holders , if not placed it wud use the default
+                delimeter:'@'//delimiter to separate the text entered
             },
             templateUrl: function(elem, attr){
                 return 'angular-tag/templates/'+attr.type+'.html';
