@@ -360,13 +360,7 @@
         };
     };
 
-   /* //make ngAnimate to be optional
-    var module=angular.module('angular-tag',['angular-tag/templates']);
-    try{
-        module=angular.module('angular-tag',['ngAnimate','angular-tag/templates'])
-    }catch(e){
-        console.error(e);
-    }*/
+
    var module=angular.module('angular-tag',['ngAnimate','angular-tag/templates']);
     module.directive('tagMe', directive)
         .directive('focusMe',directive_focus) ;
