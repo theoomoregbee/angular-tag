@@ -125,7 +125,7 @@ Used in the example html above
  
 ## Demo
  
- You can see the directive in action in the [demo page](http://theo4u.github.io/angular-tag/demos).
+ You can see the directive in action in the [demo page](http://theo4u.github.io/angular-tag/).
  
 ## Contributing
  
