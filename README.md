@@ -91,7 +91,7 @@ The tag works separately with the options based on the value
     it comes with two themes which can take the value of `default` or `material`. if used optionally it takes
      the default of `default`
 ### type
-    for the now the type is just for `input`
+    for now the type is just for `input`
 ### data
     if set , is where what `angular-tag` use in our data set to check if the entered item match any of the 
     fields/items in it or in filtering **typehead**
