@@ -24,6 +24,7 @@
  * The directive calls 2 functions/methods
  *          1. tag-added calls the onTagAdded with the added item to the parent method as parameter which is the a child in the event
  *          2. tag-removed calls the onTagRemoved with the removed item to the parent method as parameter which is the a child in the event
+ *          3. tag-active same happens it notifies the user via the onTagActive function with the event containing the item
  *
  * You can delete tag by Either
  *          1. Backspace
