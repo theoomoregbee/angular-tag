@@ -21,9 +21,9 @@
  *          1. Material
  *          2. Default
  *
- * The directive emits 2 events
- *          1. tagAdded is emitted with the added item to the parent scope
- *          2. tagRemoved is emitted with the removed item to the parent Scope
+ * The directive calls 2 functions/methods
+ *          1. tag-added calls the onTagAdded with the added item to the parent method as parameter which is the a child in the event
+ *          2. tag-removed calls the onTagRemoved with the removed item to the parent method as parameter which is the a child in the event
  *
  * You can delete tag by Either
  *          1. Backspace
@@ -199,7 +199,19 @@
             $scope.selected.push(angular.copy(input));
             $scope.input="";
             $scope.hasError=false;
-            $scope.$emit('tagAdded',input);
+            var event={action:'added', item:input};
+            $scope.onTagAdded({event:event});
+        };
+
+        /**
+         * This method removes the item from our selected tags, and it broadcast an event that an element has been removed to its parent
+         * @param item
+         */
+        $scope.remove=function (item) {
+            $scope.selected=$filter('filter')($scope.selected, function(value, index) {return value !== item;});
+            $scope.active_index=-1;
+            var event={action:'removed', item:item};
+            $scope.onTagRemoved({event:event});
         };
 
 
@@ -305,15 +317,6 @@
                 $log.error("Error, Existing before in our output , or not among data set");
             };
 
-        /**
-         * This method removes the item from our selected tags, and it broadcast an event that an element has been removed to its parent
-         * @param item
-         */
-        $scope.remove=function (item) {
-          $scope.selected=$filter('filter')($scope.selected, function(value, index) {return value !== item;});
-            $scope.active_index=-1;
-            $scope.$emit('tagRemoved',item);
-        };
 
     };
 
@@ -335,7 +338,9 @@
                 typehead:'=',//used in turning type head to assist users when typing or not
                 displayField:'@',//field to display to the user in the data set to the tag view
                 placeholder:'@',//assist users so they can use their place holders , if not placed it wud use the default
-                delimeter:'@'//delimiter to separate the text entered
+                delimeter:'@',//delimiter to separate the text entered
+                onTagAdded:'&',//event is passed via to the function to the directive to be called anytime u add a tag
+                onTagRemoved:'&'//event is passed via to the function to the directive to be called anytime we remove from the tag
             },
             templateUrl: function(elem, attr){
                 return 'angular-tag/templates/'+attr.type+'.html';

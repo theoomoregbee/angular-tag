@@ -15,15 +15,10 @@
     $scope.data=[{texti:'Jss1',added:'test'},{texti:'Jss2',add:'test3'},{texti:'Jss3',value:'owk'}];
     $scope.selected=[];
 
-    $scope.$on('tagAdded', function (event, data) {
-    console.log(data); // 'Some data'
-    });
-
-    $scope.$on('tagRemoved', function (event, data) {
-    console.log(data); // 'Some data'
-    console.log(event);
-    console.log($scope.selected)
-    });
+      $scope.tagUpdated=function (event) {
+                console.log("Event:"+event.action);
+                console.log(event.item);
+             };
 
     })
    </script>
@@ -33,10 +28,22 @@
 <p>Data: {{data}}</p>
 <p>Selected: {{selected}}</p>
 
-<tag-me type="input" data="data" selected="selected" display-field="texti" typehead="true" theme="material"  allow-outside-data-set="true" same-input="false">test</tag-me>
+<tag-me type="input"
+        data="data" selected="selected"
+        display-field="texti" typehead="true"
+        theme="material"  allow-outside-data-set="true"
+        same-input="false"
+        on-tag-added="tagUpdated(event)" on-tag-removed="tagUpdated(event)"></tag-me>
 
 <p ng-init="selectedi=[{text:'Test'},{text:'three'}]">Selected: {{selectedi}}</p>
-<tag-me type="input" data="data" selected="selectedi" placeholder="your own placeholder"  typehead="false" allow-outside-data-set="true" same-input="false">test</tag-me>
+<tag-me
+        type="input" data="data" selected="selectedi"
+        placeholder="your own placeholder"
+        typehead="false" allow-outside-data-set="true"
+        same-input="false"
+        on-tag-added="tagUpdated(event)" on-tag-removed="tagUpdated(event)">
+
+</tag-me>
 
 </body>
 </html>
