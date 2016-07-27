@@ -114,19 +114,19 @@
 
 .tag-container ul li:not(:last-child):hover
 {
+    padding-top: 0.25em;
     color: #fff;
     background-color: rgb(8,152,89);
     font-size:85%;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .tag-container ul li:not(:last-child).active
 {
-    padding-top: 0.15em;
     color: #fff;
     background-color: #777272;
     font-size:90%;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .tag-container ul.default>li{
