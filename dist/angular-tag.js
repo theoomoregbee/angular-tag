@@ -243,6 +243,8 @@
                     if($scope.active_index != index) {
                         $scope.active_index = index;
                         angular.element(lis[i]).addClass('active');
+                        var event={action:'active', item:$scope.selected[$scope.active_index]};
+                        $scope.onTagActive({event:event});
                     }else{
                         $scope.active_index = -1;
                         angular.element(lis[i]).removeClass('active');
@@ -340,7 +342,8 @@
                 placeholder:'@',//assist users so they can use their place holders , if not placed it wud use the default
                 delimeter:'@',//delimiter to separate the text entered
                 onTagAdded:'&',//event is passed via to the function to the directive to be called anytime u add a tag
-                onTagRemoved:'&'//event is passed via to the function to the directive to be called anytime we remove from the tag
+                onTagRemoved:'&',//event is passed via to the function to the directive to be called anytime we remove from the tag
+                onTagActive:'&'//event is passed via to the function to the directive to be called anytime a tag is active
             },
             templateUrl: function(elem, attr){
                 return 'angular-tag/templates/'+attr.type+'.html';
