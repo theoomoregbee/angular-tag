@@ -122,9 +122,10 @@
 
 .tag-container ul li:not(:last-child).active
 {
+    padding-top: 0.15em;
     color: #fff;
     background-color: #777272;
-    font-size:85%;
+    font-size:90%;
     font-weight: 700;
 }
 
@@ -133,7 +134,7 @@
 }
 
 .tag-container ul.material>li{
-    border-radius: 0px;
+    border-radius: 0.25em;
     padding-top: 1px;
 }
 

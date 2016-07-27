@@ -1,9 +1,0 @@
-.tag-container ul.material>li {
-    border-radius: 0.25em;
-    padding-top: 1px;
-}
-.tag-container ul li:not(:last-child):hover {
-    padding-top: .15em;
-    font-size: 90%;
-    font-weight: 600;
-}
