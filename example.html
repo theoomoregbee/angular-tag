@@ -15,6 +15,8 @@
     $scope.data=[{texti:'Jss1',added:'test'},{texti:'Jss2',add:'test3'},{texti:'Jss3',value:'owk'}];
     $scope.selected=[];
 
+             $scope.max=4;
+
       $scope.tagUpdated=function (event) {
                 console.log("Event:"+event.action);
                 console.log(event.item);
@@ -32,8 +34,10 @@
         data="data" selected="selected"
         display-field="texti" typehead="true"
         theme="material"  allow-outside-data-set="true"
-        same-input="false"
-        on-tag-added="tagUpdated(event)" on-tag-removed="tagUpdated(event)"></tag-me>
+        same-input="false" max="max"
+        on-tag-maximum="tagUpdated(event)"
+        on-tag-added="tagUpdated(event)"
+        on-tag-removed="tagUpdated(event)"></tag-me>
 
 <p ng-init="selectedi=[{text:'Test'},{text:'three'}]">Selected: {{selectedi}}</p>
 <tag-me

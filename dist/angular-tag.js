@@ -21,10 +21,12 @@
  *          1. Material
  *          2. Default
  *
- * The directive calls 2 functions/methods
+ * The directive calls some few events
  *          1. tag-added calls the onTagAdded with the added item to the parent method as parameter which is the a child in the event
  *          2. tag-removed calls the onTagRemoved with the removed item to the parent method as parameter which is the a child in the event
  *          3. tag-active same happens it notifies the user via the onTagActive function with the event containing the item
+ *          4. tag-maximum same as above this is calls onTagMaximum when the selected tags count hits its maximum specified in the $scope.max
+ *
  *
  * You can delete tag by Either
  *          1. Backspace
@@ -192,16 +194,24 @@
         };
 
         /**
-         * this method updates our tag view with the input parameter, and emit a message to the parent that an object is gotten
+         * this method updates our tag view with the input parameter, and pass an event to the parent that an object is gotten
+         * and it checks if the max is specified i.e if the maximum tags is reached or if not specified it should allow tags till infinity
+         *
+         * it sends two event when the a tag is added and when the selected tags hits maximum allowed
          * @param input
          */
         $scope.update=function (input) {
-            //input.generated_count=$scope.selected.length;
-            $scope.selected.push(angular.copy(input));
-            $scope.input="";
-            $scope.hasError=false;
-            var event={action:'added', item:input};
-            $scope.onTagAdded({event:event});
+            if($scope.selected.length<$scope.max || $scope.max==undefined) {
+                $scope.selected.push(angular.copy(input));
+                $scope.input = "";
+                $scope.hasError = false;
+                var event = {action: 'added', item: input};
+                $scope.onTagAdded({event: event});
+            }else{
+                $scope.hasError = true;
+                var event = {action: 'maximum', item: input};
+                $scope.onTagMaximum({event: event});
+            }
         };
 
         /**
@@ -344,7 +354,9 @@
                 delimeter:'@',//delimiter to separate the text entered
                 onTagAdded:'&',//event is passed via to the function to the directive to be called anytime u add a tag
                 onTagRemoved:'&',//event is passed via to the function to the directive to be called anytime we remove from the tag
-                onTagActive:'&'//event is passed via to the function to the directive to be called anytime a tag is active
+                onTagActive:'&',//event is passed via to the function to the directive to be called anytime a tag is active
+                max:'=',//max tag that can be allowed
+                onTagMaximum:'&'//event called when the tag hits its maximum number of allowable input
             },
             templateUrl: function(elem, attr){
                 return 'angular-tag/templates/'+attr.type+'.html';
