@@ -12,7 +12,7 @@
 </div>
 
 <ul class="tag-typehead" ng-show="input.length && typehead && results.length " >
-    <li class="animate-repeat" ng-repeat="item in data | filter:input as results">
+    <li class="animate-repeat" ng-repeat="item in data | filter:input as results" ng-style="tagStyleColor">
        <a href="javascript:void(0)" ng-click="processor(item[displayField])">{{item[displayField]}}</a>
     </li>
     <!--<li class="animate-repeat" ng-if="results.length == 0">
