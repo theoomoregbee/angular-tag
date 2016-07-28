@@ -47,11 +47,7 @@
      * @returns {*}
      */
     var data_init=function (variable,default_value) {
-
-        if(variable == undefined || variable == null)
-            return default_value;
-        else
-            return variable;
+        return variable ? variable : default_value;
     };
 
     /**
@@ -71,8 +67,17 @@
         $scope.typehead=data_init($scope.typehead,true);//used in displaying type head or not
         $scope.displayField=data_init($scope.displayField,'text');//used in displaying which field inside the data set we need
         $scope.placeholder=data_init($scope.placeholder,'Enter Text with , separated');//this is helps for custom placeholder
+        $scope.tagColor= data_init($scope.tagColor, "#089859");
 
         $scope.active_index=-1;//this hold the active selected tag index
+
+
+        /**
+            Set the tag color
+        **/
+        $scope.tagStyleColor = {
+            'background-color': $scope.tagColor
+        };
 
         /**
          * This method checks if an item(input) exist inside an array
@@ -343,6 +348,7 @@
             restrict: 'E',
             scope: {
                 type: '@',
+                tagColor: '@',
                 theme:'@',//help to get theme to use in manipulating tag via
                 data: '=',//if set , is where we use in our data set to check if the entered item match any of the fields/items in it
                 selected:'=',//return the selected item(s)/tags here
