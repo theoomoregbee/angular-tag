@@ -158,7 +158,7 @@ Here's what you need to do before start working on the code:
 
 You can build angular-tag with a single command:
 
-    grunt build
+    gulp build
  
 That performs all tasks needed to produce the final JavaScript and CSS files. After the build completes, a folder named `dist` will be generated containing the following files:
 
@@ -170,7 +170,7 @@ That performs all tasks needed to produce the final JavaScript and CSS files. Af
 ### Running It on local server
  You can run it using the task below, which would run and watch any changes to our .js and .css and anything inside the **template** folder
 
-    grunt serve
+    gulp serve
 The task above would run and listen for any js and run the `grunt build-js` or `grunt build-css` or `grunt template-build` for css and template respectively
 
 ## License
