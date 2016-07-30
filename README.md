@@ -171,7 +171,7 @@ That performs all tasks needed to produce the final JavaScript and CSS files. Af
  You can run it using the task below, which would run and watch any changes to our .js and .css and anything inside the **template** folder
 
     gulp serve
-The task above would run and listen for any js and run the `grunt build-js` or `grunt build-css` or `grunt template-build` for css and template respectively
+The task above would run and listen for any js and run the `gulp build-js` or `gulp build-css` or `gulp template-build` for css and template respectively
 
 ## License
  
