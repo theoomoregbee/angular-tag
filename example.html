@@ -16,6 +16,7 @@
     $scope.selected=[];
 
              $scope.max=4;
+             $scope.delimiter=[",","x"," "];
 
       $scope.tagUpdated=function (event) {
                 console.log("Event:"+event.action);
@@ -34,7 +35,7 @@
         data="data" selected="selected"
         display-field="texti" typehead="true"
         theme="material"  allow-outside-data-set="true"
-        same-input="false" max="max"
+        same-input="false" max="max" delimiter="delimiter"
         on-tag-maximum="tagUpdated(event)"
         on-tag-added="tagUpdated(event)"
         on-tag-removed="tagUpdated(event)"></tag-me>

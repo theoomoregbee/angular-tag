@@ -27,6 +27,7 @@
  *          3. tag-active same happens it notifies the user via the onTagActive function with the event containing the item
  *          4. tag-maximum same as above this is calls onTagMaximum when the selected tags count hits its maximum specified in the $scope.max
  *
+ * Delimiter can be array of delimiters[default=','] or enter key which is default for the system to use despite the delimiters
  *
  * You can delete tag by Either
  *          1. Backspace
@@ -61,7 +62,7 @@
      */
     var controllerFunction=function ($scope,$filter,$log) {
         $scope.hasError=false;//when there is error while entrying record
-        $scope.delimiter=data_init($scope.delimiter,',');//used in specifying which separator to use or use default ,
+        $scope.delimiter=data_init($scope.delimiter,[',']);//used in specifying which separator to use or use default ,
         $scope.data = data_init($scope.data,[]);
         $scope.selected=data_init($scope.selected,[]);
         $scope.allowOutsideDataSet=data_init($scope.allowOutsideDataSet,false);
@@ -71,8 +72,8 @@
         $scope.typehead=data_init($scope.typehead,true);//used in displaying type head or not
         $scope.displayField=data_init($scope.displayField,'text');//used in displaying which field inside the data set we need
         $scope.placeholder=data_init($scope.placeholder,'Enter Text with , separated');//this is helps for custom placeholder
-
         $scope.active_index=-1;//this hold the active selected tag index
+
 
         /**
          * This method checks if an item(input) exist inside an array
@@ -84,6 +85,31 @@
             return $filter('filter')(array, function(value, index) {return value[$scope.displayField] === input;})[0];
         };
 
+        /**
+         * This method strips off any delimiter in our input and return a refined input with no delimiter
+         * @param input the input to strip delimiter of
+         * @returns {*}
+         */
+        $scope.strip_delimiters=function (input) {
+            var n=$scope.delimiter.length;
+           for(var i=0;i<n;i++)
+               input=input.replace($scope.delimiter[i],'');
+            return input;//stripped input with no delimiter
+        };
+
+        /**
+         * This method checks if there exist a delimiter in our input
+         * @param input to work on
+         * @returns {boolean} returns either true or false , if found true else false
+         */
+        $scope.check_delimiter=function (input) {
+            var n=$scope.delimiter.length;
+            //$log.log("Size:"+n+"--"+$scope.delimiter);
+            for(var i=0;i<n;i++)
+                if(input.indexOf($scope.delimiter[i]) > -1 )
+                    return true;
+            return false;
+        };
 
         /**
          * on key up call this function to help process our tag input
@@ -91,10 +117,10 @@
         $scope.on_input_keyup=function (event) {
             var input='';
             if($scope.input != undefined)
-                input=$scope.input.replace($scope.delimiter,'');
-
+                input=$scope.strip_delimiters($scope.input);
+                    //$log.log("striped input:"+input);
             //if user just type and uses our defined delimiter do this function
-            if ($scope.input != undefined && $scope.input.indexOf($scope.delimiter) > -1) {
+            if ($scope.input != undefined && $scope.check_delimiter($scope.input) == true) {
                 if(input!="")
                     $scope.processor(input);
                 return;
@@ -351,7 +377,7 @@
                 typehead:'=',//used in turning type head to assist users when typing or not
                 displayField:'@',//field to display to the user in the data set to the tag view
                 placeholder:'@',//assist users so they can use their place holders , if not placed it wud use the default
-                delimeter:'@',//delimiter to separate the text entered
+                delimiter:'=?',//delimiter to separate the text entered which is an array of delimiters
                 onTagAdded:'&',//event is passed via to the function to the directive to be called anytime u add a tag
                 onTagRemoved:'&',//event is passed via to the function to the directive to be called anytime we remove from the tag
                 onTagActive:'&',//event is passed via to the function to the directive to be called anytime a tag is active
@@ -386,5 +412,5 @@
 
    var module=angular.module('angular-tag',['angular-tag/templates']);
     module.directive('tagMe', directive)
-        .directive('focusMe',directive_focus) ;
+          .directive('focusMe',directive_focus) ;
 }());
