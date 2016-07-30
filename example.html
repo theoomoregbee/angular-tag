@@ -33,7 +33,7 @@
 <p>Max Selected Allowed: {{selected.length+" in "+max}}</p>
 <tag-me type="input"
         data="data" selected="selected"
-        display-field="texti" typehead="true"
+        display-field="texti"
         theme="material"  allow-outside-data-set="true"
         same-input="false" max="max" delimiter="delimiter"
         on-tag-maximum="tagUpdated(event)"
@@ -44,7 +44,7 @@
 <tag-me
         type="input" data="data" selected="selectedi"
         placeholder="your own placeholder"
-        allow-outside-data-set="true"
+        typehead="false" allow-outside-data-set="true"
         same-input="false"
         on-tag-added="tagUpdated(event)"
         on-tag-removed="tagUpdated(event)"
