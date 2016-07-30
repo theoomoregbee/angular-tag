@@ -372,7 +372,7 @@
                 theme:'@',//help to get theme to use in manipulating tag via
                 data: '=',//if set , is where we use in our data set to check if the entered item match any of the fields/items in it
                 selected:'=',//return the selected item(s)/tags here
-                sameInput:'=',//to allow same input , that is a selected item can appear more than once in our tagging system
+                sameInput:'=?',//to allow same input , that is a selected item can appear more than once in our tagging system
                 allowOutsideDataSet:'=',//if the allowed input should be outside the data set specified
                 typehead:'=?',//used in turning type head to assist users when typing or not
                 displayField:'@',//field to display to the user in the data set to the tag view
