@@ -72,6 +72,7 @@
         $scope.typehead=data_init($scope.typehead,true);//used in displaying type head or not
         $scope.displayField=data_init($scope.displayField,'text');//used in displaying which field inside the data set we need
         $scope.placeholder=data_init($scope.placeholder,'Enter Text with , separated');//this is helps for custom placeholder
+        $scope.max=data_init($scope.max,undefined);//this is helps to allow infinity value of input tag by default
         $scope.active_index=-1;//this hold the active selected tag index
 
 
@@ -381,7 +382,7 @@
                 onTagAdded:'&',//event is passed via to the function to the directive to be called anytime u add a tag
                 onTagRemoved:'&',//event is passed via to the function to the directive to be called anytime we remove from the tag
                 onTagActive:'&',//event is passed via to the function to the directive to be called anytime a tag is active
-                max:'=',//max tag that can be allowed
+                max:'=?',//max tag that can be allowed
                 onTagMaximum:'&'//event called when the tag hits its maximum number of allowable input
             },
             templateUrl: function(elem, attr){
