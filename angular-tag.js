@@ -374,7 +374,7 @@
                 selected:'=',//return the selected item(s)/tags here
                 sameInput:'=',//to allow same input , that is a selected item can appear more than once in our tagging system
                 allowOutsideDataSet:'=',//if the allowed input should be outside the data set specified
-                typehead:'=',//used in turning type head to assist users when typing or not
+                typehead:'=?',//used in turning type head to assist users when typing or not
                 displayField:'@',//field to display to the user in the data set to the tag view
                 placeholder:'@',//assist users so they can use their place holders , if not placed it wud use the default
                 delimiter:'=?',//delimiter to separate the text entered which is an array of delimiters
