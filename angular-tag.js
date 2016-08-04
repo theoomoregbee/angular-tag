@@ -160,7 +160,7 @@
         };
 
         /**
-         * This method is to help navigate between or added tags when the key arrow left and right is pressed
+         * This method is to help navigate between or added tags when the key arrow left,down,up and right is pressed
          * and this works with only the keypress down event
          * @param event
          */
@@ -180,6 +180,12 @@
         if(event.keyCode == 39 && $scope.getCursorPosition(event.target) == input.length){
             var first_index = ($scope.active_index==-1) || ($scope.active_index==($scope.selected.length-1))?(0):($scope.active_index+1);
             $scope.moveToTag(event,first_index);
+            return;
+        }
+
+        // when the user press the down button activate our type head to show and move down the list
+        if(event.keyCode == 40){
+           console.info("Press Down Arrow");
             return;
         }
 
