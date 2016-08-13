@@ -5,7 +5,7 @@ var gulp = require('gulp');
 var uglify = require('gulp-uglify');
 var rename= require('gulp-rename');
 var gutil = require('gulp-util');//to help log any error found in our .js file
-var runSequence = require('run-sequence');
+//var runSequence = require('run-sequence');
 var cssnano = require('gulp-cssnano');
 var del = require('del');
 var webserver = require('gulp-webserver');
@@ -46,18 +46,8 @@ gulp.task('copy-css',function () {
 });
 
 
-gulp.task('build', function (callback) {
-    runSequence('clean','template-build',
-      //build in parallel
-        ['build-css', 'build-js'],
-        callback
-    )
-});
-
-gulp.task('build-css', function (callbacks) {
-    runSequence('copy-css','build-css-script',
-        callbacks
-    )
+gulp.task('clean', function () {
+    return del('dist');
 });
 
 gulp.task('build-css-script', function() {
@@ -68,6 +58,12 @@ gulp.task('build-css-script', function() {
         .pipe(gulp.dest('dist'));
 });
 
+gulp.task('build-css', gulp.series('copy-css','build-css-script', function (done) {
+    done();
+} ) );
+
+
+
 /*
  *  Concatenate the template to the angular-tag.js in dist
  **/
@@ -77,25 +73,6 @@ gulp.task('concatenate',function () {
         .pipe(gulp.dest('dist'));
 });
 
-
-gulp.task('build-js', function (callbacks) {
-    runSequence('copy-js','concatenate','build-js-script',
-        // this callback is executed at the end, if any of the previous tasks errored,
-        // the first param contains the error
-        function (err) {
-            //if any error happened in the previous tasks, exit with a code > 0
-            if (err) {
-                var exitCode = 2;
-                console.log('[ERROR] gulp build task failed', err);
-                console.log('[FAIL] gulp build task failed - exiting with code ' + exitCode);
-                return process.exit(exitCode);
-            }
-            else {
-                return callbacks();
-            }
-        }
-    )
-});
 gulp.task('build-js-script', function() {
     console.info("Build Our js");
     return gulp.src(['dist/angular-tag.js'])
@@ -104,12 +81,11 @@ gulp.task('build-js-script', function() {
         .pipe(gulp.dest('dist'));
 });
 
+gulp.task('build-js', gulp.series('copy-js','concatenate','build-js-script',function(done){
+    done();
+}));
 
-gulp.task('template-build', function (callbacks) {
-    runSequence('build-template-files','build-js',
-        callbacks
-    )
-});
+
 
 gulp.task('build-template-files', function () {
     return gulp.src('templates/**/*.html')
@@ -119,9 +95,15 @@ gulp.task('build-template-files', function () {
         .pipe(gulp.dest('.'));
 });
 
-gulp.task('clean', function () {
-    return del.sync('dist');
-});
+gulp.task('template-build', gulp.series('build-template-files','build-js', function(done){
+    done();
+}));
+
+
+
+gulp.task('build', gulp.series('clean','template-build', function(done){
+    gulp.parallel('build-css', 'build-js') ;
+}));
 
 
 gulp.task('watch', function(){
@@ -130,4 +112,6 @@ gulp.task('watch', function(){
     gulp.watch('templates/*.html',['template-build']);
 });
 
-gulp.task("serve",['build','watch','webserver']);
+gulp.task("serve",gulp.series('build','watch','webserver', function (done) {
+    done();
+}));
