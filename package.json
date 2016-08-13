@@ -4,7 +4,7 @@
   "description": "Angular Tagging, to tag inputs",
   "main": "angular-tag.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": true
   },
   "repository": {
     "type": "git",
