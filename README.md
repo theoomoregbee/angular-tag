@@ -1,5 +1,5 @@
 # angular-tag
- 
+[![Build Status](https://travis-ci.org/theo4u/angular-tag.svg?branch=master)](https://travis-ci.org/theo4u/angular-tag) 
 Tags input directive for AngularJS. Check out the ReadMe on  [angular-tag website](http://theo4u.github.io/angular-tag/) for more information.
 
 ![angular-tag](https://www.googledrive.com/host/0B9WhZZgFzvoBamRRTFlXc19JRXc)
