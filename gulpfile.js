@@ -13,6 +13,12 @@ var templateCache = require('gulp-angular-templatecache');
 var concat = require('gulp-concat');
 
 
+function handleError (err) {
+    gutil.log(err);
+    process.exit(-1);
+}
+
+
 gulp.task('webserver', function() {
     gulp.src('.')
         .pipe(webserver({
@@ -58,7 +64,7 @@ gulp.task('build-css-script', function() {
     console.info("Build css");
     return gulp.src(['dist/angular-tag.css'])
         .pipe(rename('angular-tag.min.css'))
-        .pipe(cssnano('angular-tag.min.css').on('error', gutil.log))
+        .pipe(cssnano('angular-tag.min.css').on('error', handleError))
         .pipe(gulp.dest('dist'));
 });
 
@@ -81,7 +87,7 @@ gulp.task('build-js-script', function() {
     console.info("Build Our js");
     return gulp.src(['dist/angular-tag.js'])
         .pipe(rename('angular-tag.min.js'))
-        .pipe(uglify().on('error', gutil.log))
+        .pipe(uglify().on('error', handleError))
         .pipe(gulp.dest('dist'));
 });
 
