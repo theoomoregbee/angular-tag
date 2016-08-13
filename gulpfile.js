@@ -5,7 +5,6 @@ var gulp = require('gulp');
 var uglify = require('gulp-uglify');
 var rename= require('gulp-rename');
 var gutil = require('gulp-util');//to help log any error found in our .js file
-//var runSequence = require('run-sequence');
 var cssnano = require('gulp-cssnano');
 var del = require('del');
 var webserver = require('gulp-webserver');
@@ -54,7 +53,7 @@ gulp.task('build-css-script', function() {
     console.info("Build css");
     return gulp.src(['dist/angular-tag.css'])
         .pipe(rename('angular-tag.min.css'))
-        .pipe(cssnano('angular-tag.min.css').on('error', handleError))
+        .pipe(cssnano('angular-tag.min.css').on('error', gutil.log))
         .pipe(gulp.dest('dist'));
 });
 
@@ -73,13 +72,13 @@ gulp.task('concatenate',function () {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('build-js-script', function() {
+gulp.task('build-js-script', gulp.series(function(done) {
     console.info("Build Our js");
     return gulp.src(['dist/angular-tag.js'])
         .pipe(rename('angular-tag.min.js'))
-        .pipe(uglify().on('error', handleError))
+        .pipe(uglify().on('error', gutil.log))
         .pipe(gulp.dest('dist'));
-});
+}));
 
 gulp.task('build-js', gulp.series('copy-js','concatenate','build-js-script',function(done){
     done();
@@ -101,17 +100,15 @@ gulp.task('template-build', gulp.series('build-template-files','build-js', funct
 
 
 
-gulp.task('build', gulp.series('clean','template-build', function(done){
-    gulp.parallel('build-css', 'build-js') ;
-}));
-
-
-gulp.task('watch', function(){
-    gulp.watch('*.js', ['build-js']);
-    gulp.watch('*.css', ['build-css']);
-    gulp.watch('templates/*.html',['template-build']);
-});
-
-gulp.task("serve",gulp.series('build','watch','webserver', function (done) {
+gulp.task('build', gulp.series('clean','build-css','template-build','build-js', function(done){
     done();
 }));
+
+
+gulp.task('watch', function() {
+    gulp.watch('*.js', gulp.parallel('build-js'));
+    gulp.watch('*.css', gulp.parallel('build-css'));
+    gulp.watch('templates/*.html', gulp.parallel('template-build'));
+});
+
+gulp.task("serve",gulp.parallel('build','watch','webserver'));

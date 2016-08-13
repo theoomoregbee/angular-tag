@@ -30,7 +30,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^1.5.4",
     "gulp-util": "^3.0.7",
-    "gulp-webserver": "^0.9.1",
-    "run-sequence": "^1.2.2"
-  }
+    "gulp-webserver": "^0.9.1"
+  },
+  "dependencies": {}
 }
