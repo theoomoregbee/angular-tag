@@ -13,8 +13,9 @@ var concat = require('gulp-concat');
 
 
 function handleError (err) {
-    /*gutil.log(err);*/
+    gutil.log(err);
     process.exit(1);
+    return false;
 }
 
 
