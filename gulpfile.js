@@ -76,7 +76,7 @@ gulp.task('build-js-script', gulp.series(function(done) {
     console.info("Build Our js");
     return gulp.src(['dist/angular-tag.js'])
         .pipe(rename('angular-tag.min.js'))
-        .pipe(uglify().on('error', gutil.log))
+        .pipe(uglify().on('error', handleError))
         .pipe(gulp.dest('dist'));
 }));
 
