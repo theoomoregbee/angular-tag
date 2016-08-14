@@ -418,6 +418,6 @@
 
 
    var module=angular.module('angular-tag',['angular-tag/templates']);
-    module.directive('tagMe', directive);
+    module.directive('tagMe', directive)
           .directive('focusMe',directive_focus) ;
 }());
