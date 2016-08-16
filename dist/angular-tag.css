@@ -205,7 +205,7 @@
     text-decoration: none;
 }
 
-.tag-typehead li>a:hover{
+.tag-typehead li>a:hover, .tag-typehead li>a.active{
     color: #fff;
     text-decoration: none;
     background-color: #337ab7;

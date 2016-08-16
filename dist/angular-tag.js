@@ -74,7 +74,7 @@
         $scope.placeholder=data_init($scope.placeholder,'Enter Text with , separated');//this is helps for custom placeholder
         $scope.max=data_init($scope.max,undefined);//this is helps to allow infinity value of input tag by default
         $scope.active_index=-1;//this hold the active selected tag index
-
+        $scope.typeheadOpened=false;//notify and holds the true or false , depending when the typehead options is showed for selection
 
         /**
          * This method checks if an item(input) exist inside an array
@@ -183,9 +183,16 @@
             return;
         }
 
-        // when the user press the down button activate our type head to show and move down the list
-        if(event.keyCode == 40){
+        // when the user press the down button and typehead is true activate our type head to show and move down the list
+        if(event.keyCode == 40 && $scope.typehead == true){
            console.info("Press Down Arrow");
+                $scope.typeheadOpened=true;//open the typehead
+            var active=$scope.getActiveTypeHead(event);
+            console.log("Active_index:", active);
+            console.log("Data_index:", $scope.data.length-1);
+            var first_index = (active == -1) || (active == ($scope.data.length-1))?(0):(active + 1);
+            console.log("First Index:", first_index);
+            $scope.moveToTagTypeHead(event,first_index);
             return;
         }
 
@@ -237,6 +244,7 @@
             if($scope.selected.length<$scope.max || $scope.max==undefined) {
                 $scope.selected.push(angular.copy(input));
                 $scope.input = "";
+                $scope.typeheadOpened=false;
                 $scope.hasError = false;
                 var event = {action: 'added', item: input};
                 $scope.onTagAdded({event: event});
@@ -275,6 +283,7 @@
 
         /**
          * This method moves the cursor to the tag in a particular index  of our event which holds the parent and set it to be active
+         * @param event
          * @param index
          */
         $scope.moveToTag = function (event,index) {
@@ -297,7 +306,43 @@
                     angular.element(lis[i]).removeClass('active');
             }
         };
-        
+
+        /**
+         * This method moves the cursor to the tag typehead in a particular index  of our event which holds the parent and set its class to be active
+         * @param event
+         * @param index
+         */
+        $scope.moveToTagTypeHead = function (event,index) {
+            var i=0;
+           var main_tag=angular.element(event.target.parentNode.parentNode.parentNode.parentNode).find('ul')[1];//get the parent (div.main-tag ul)[1]
+            var lis=angular.element(main_tag).find('a');
+            var size=lis.length;
+            for(var i=0; i<size;i++)
+                if(i==index) {
+                    //check if it contains active before then toggle
+                    angular.element(lis[i]).addClass('active');
+                }else
+                    angular.element(lis[i]).removeClass('active');
+
+        };
+
+        /**
+         *  This method helps in going through our type head to get the active index and return the index of it or return -1 for not found
+         * @param event
+         * @return {number} -1 for not found >-1 for found index
+         */
+        $scope.getActiveTypeHead=function (event) {
+            var i=0;
+            var main_tag=angular.element(event.target.parentNode.parentNode.parentNode.parentNode).find('ul')[1];//get the parent (div.main-tag ul)[1]
+            var lis=angular.element(main_tag).find('a');
+            var size=lis.length;
+            for(var i=0; i<size-1;i++)
+                if(angular.element(lis[i]).hasClass('active'))
+                    return i; // is the active one
+
+            return -1;//no active
+        };
+
         /**
          * when the user type in the field it should call this function for checking
          *
@@ -418,7 +463,8 @@
 
 
    var module=angular.module('angular-tag',['angular-tag/templates']);
-    module.directive('tagMe', directive);
+    module.directive('tagMe', directive)
           .directive('focusMe',directive_focus) ;
 }());
-angular.module('angular-tag/templates', []).run(['$templateCache', function($templateCache) {$templateCache.put('angular-tag/templates/input.html','<div id="main-tag">\r\n<div class="tag-container">\r\n <ul ng-class="[\'tag\',{focus:isFocus},theme ]" ng-click="isFocus=true" ng-keydown="direction_keys($event)">\r\n    <li ng-repeat="select in selected" ng-click="(moveToTag($event,$index)) ">\r\n      {{select[displayField]}}  <a href="javascript:void(0)" ng-click="remove(select)">&times;</a>\r\n    </li>\r\n<li>\r\n    <input ng-class="{error:hasError}" ng-model="input" ng-keyup="on_input_keyup($event)" ng-keydown="on_input_keydown($event)" ng-focus="isFocus=true" ng-blur="isFocus=false" focus-me="isFocus"\r\n         type="input" placeholder="{{placeholder}}"  >\r\n</li>\r\n </ul>\r\n</div>\r\n\r\n<ul class="tag-typehead" ng-show="input.length && typehead && results.length " >\r\n    <li class="animate-repeat" ng-repeat="item in data | filter:input as results">\r\n       <a href="javascript:void(0)" ng-click="processor(item[displayField])">{{item[displayField]}}</a>\r\n    </li>\r\n    <!--<li class="animate-repeat" ng-if="results.length == 0">\r\n        <strong>No results found...</strong>\r\n    </li>-->\r\n</ul>\r\n</div>');}]);
+
+angular.module('angular-tag/templates', []).run(['$templateCache', function($templateCache) {$templateCache.put('angular-tag/templates/input.html','<div id="main-tag">\r\n<div class="tag-container">\r\n <ul ng-class="[\'tag\',{focus:isFocus},theme ]" ng-click="isFocus=true" ng-keydown="direction_keys($event)">\r\n    <li ng-repeat="select in selected" ng-click="(moveToTag($event,$index)) ">\r\n      {{select[displayField]}}  <a href="javascript:void(0)" ng-click="remove(select)">&times;</a>\r\n    </li>\r\n<li>\r\n    <input ng-class="{error:hasError}" ng-model="input" ng-keyup="on_input_keyup($event)" ng-keydown="on_input_keydown($event)" ng-focus="isFocus=true" ng-blur="isFocus=false" focus-me="isFocus"\r\n         type="input" placeholder="{{placeholder}}"  >\r\n</li>\r\n </ul>\r\n</div>\r\n\r\n<ul class="tag-typehead" ng-show="(input.length && typehead && results.length) || (typehead && typeheadOpened) " >\r\n    <li class="animate-repeat" ng-repeat="item in data | filter:input as results">\r\n       <a href="javascript:void(0)" ng-click="processor(item[displayField])">{{item[displayField]}}</a>\r\n    </li>\r\n    <!--<li class="animate-repeat" ng-if="results.length == 0">\r\n        <strong>No results found...</strong>\r\n    </li>-->\r\n</ul>\r\n</div>');}]);
