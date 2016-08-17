@@ -1,6 +1,9 @@
 # angular-tag
 
 [![Build Status](https://travis-ci.org/theo4u/angular-tag.svg?branch=master)](https://travis-ci.org/theo4u/angular-tag) 
+[![David](https://img.shields.io/david/dev/theo4u/angular-tag.svg)]()
+[![npm](https://img.shields.io/npm/v/angular-tag.svg)](https://www.npmjs.com/package/angular-tag) [![Bower](https://img.shields.io/bower/v/angular-tag.svg)](http://bower.io/search/?q=angular-tag)
+
 
 Tags input directive for AngularJS. Check out the ReadMe on  [angular-tag website](http://theo4u.github.io/angular-tag/) for more information.
 
