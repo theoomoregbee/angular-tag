@@ -185,18 +185,30 @@
 
         // when the user press the down button and typehead is true activate our type head to show and move down the list
         if(event.keyCode == 40 && $scope.typehead == true){
-           console.info("Press Down Arrow");
-                $scope.typeheadOpened=true;//open the typehead
+            console.info("Press Down Arrow");
+            $scope.typeheadOpened=true;//open the typehead
             var active=$scope.getActiveTypeHead(event);
-            console.log("Active_index:", active);
-            console.log("Data_index:", $scope.data.length-1);
             var first_index = (active == -1) || (active == ($scope.data.length-1))?(0):(active + 1);
-            console.log("First Index:", first_index);
             $scope.moveToTagTypeHead(event,first_index);
             return;
         }
 
-          };
+        // when the user press the up button and typehead is true activate our type head to show and move up the list
+         if(event.keyCode == 38 && $scope.typehead == true){
+                console.info("Press Up Arrow");
+                $scope.typeheadOpened=true;//open the typehead
+                var active=$scope.getActiveTypeHead(event);
+               var last_index = (active==-1) || (active==0)?($scope.data.length-1):(active-1);
+
+             console.log("active:", active);
+             console.log("last_index:", last_index);
+
+                $scope.moveToTagTypeHead(event,last_index);
+                return;
+         }
+
+
+    };
 
         /**
          * Thanks to Dasari Srinivas http://blog.sodhanalibrary.com/2015/02/get-cursor-position-in-text-input-field.html#.V5Ly47grK00
