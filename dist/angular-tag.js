@@ -124,13 +124,13 @@
             if ($scope.input != undefined && $scope.check_delimiter($scope.input) == true) {
                 if(input!="")
                     $scope.processor(input);
-                return;
+                return 0;
             }
 
             //if user types and presses enter key (keyCode 13 ASCII)
             if(event.keyCode == 13 && input != "" ) {
                    $scope.processor(input);
-                return;
+                return 0;
             }
 
 
@@ -146,7 +146,7 @@
                 }
 
                 $scope.moveToTag(event,last_index);//-1 means move the tag to the last tag
-                return;
+                return 0;
             }
 
              
@@ -154,7 +154,7 @@
             //when user press it no text to remove from behind again
             if(event.keyCode == 46 && input.slice($scope.getCursorPosition(event.target),input.length) == ""){
                 $scope.remove($scope.selected[$scope.active_index]);
-            return;
+            return 0;
             }
 
         };
@@ -180,7 +180,7 @@
         if(event.keyCode == 39 && $scope.getCursorPosition(event.target) == input.length){
             var first_index = ($scope.active_index==-1) || ($scope.active_index==($scope.selected.length-1))?(0):($scope.active_index+1);
             $scope.moveToTag(event,first_index);
-            return;
+            return 0;
         }
 
         // when the user press the down button and typehead is true activate our type head to show and move down the list
@@ -189,13 +189,13 @@
             var active=$scope.getActiveTypeHead(event);
             var first_index = (active == -1) || (active == ($scope.data.length-1))?(0):(active + 1);
             $scope.moveToTagTypeHead(event,first_index);
-            return;
+            return 0;
         }
 
         // when the user press the up button and typehead is true activate our type head to show
          if(event.keyCode == 38 && $scope.typehead == true){
                 $scope.typeheadOpened=true;//open the typehead
-                return;
+                return 0;
          }
 
 
@@ -261,8 +261,8 @@
                 $scope.input = "";
                 $scope.typeheadOpened=false;
                 $scope.hasError = false;
-                var event = {action: 'added', item: input};
-                $scope.onTagAdded({event: event});
+                var event_temp = {action: 'added', item: input};
+                $scope.onTagAdded({event: event_temp});
             }else{
                 $scope.hasError = true;
                 var event = {action: 'maximum', item: input};
@@ -302,7 +302,6 @@
          * @param index
          */
         $scope.moveToTag = function (event,index) {
-            var i=0;
             var lis=angular.element(event.target.parentNode.parentNode).find('li');
             var size=lis.length;
             for(var i=0; i<size-1;i++){
@@ -311,8 +310,8 @@
                     if($scope.active_index != index) {
                         $scope.active_index = index;
                         angular.element(lis[i]).addClass('active');
-                        var event={action:'active', item:$scope.selected[$scope.active_index]};
-                        $scope.onTagActive({event:event});
+                        var event_temp={action:'active', item:$scope.selected[$scope.active_index]};
+                        $scope.onTagActive({event:event_temp});
                     }else{
                         $scope.active_index = -1;
                         angular.element(lis[i]).removeClass('active');
@@ -328,7 +327,6 @@
          * @param index
          */
         $scope.moveToTagTypeHead = function (event,index) {
-            var i=0;
            var main_tag=angular.element(event.target.parentNode.parentNode.parentNode.parentNode).find('ul')[1];//get the parent (div.main-tag ul)[1]
             var lis=angular.element(main_tag).find('a');
             var size=lis.length;
@@ -347,7 +345,6 @@
          * @return {number} -1 for not found >-1 for found index
          */
         $scope.getActiveTypeHead=function (event) {
-            var i=0;
             var main_tag=angular.element(event.target.parentNode.parentNode.parentNode.parentNode).find('ul')[1];//get the parent (div.main-tag ul)[1]
             var lis=angular.element(main_tag).find('a');
             var size=lis.length;
