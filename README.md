@@ -139,9 +139,9 @@ Used in the example html above
 Here's what you need to do before start working on the code:
 
 1. Install Node.js (0.10.22 or higher)
-2. Install `grunt-cli` globally
+2. Install `gulp v4` globally
 
-        npm install -g grunt-cli karma-cli
+        npm install -g 'gulpjs/gulp.git#4.0' karma-cli
 3. Clone your repository
 
         git clone https://github.com/<your_github_username>/angular-tag
