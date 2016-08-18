@@ -60,7 +60,7 @@
      * @param $scope
      * @param $filter
      */
-    var controllerFunction=function ($scope,$filter,$log) {
+    var controllerFunction=function ($scope,$filter,$log,$timeout) {
         $scope.hasError=false;//when there is error while entrying record
         $scope.delimiter=data_init($scope.delimiter,[',']);//used in specifying which separator to use or use default ,
         $scope.data = data_init($scope.data,[]);
@@ -185,7 +185,6 @@
 
         // when the user press the down button and typehead is true activate our type head to show and move down the list
         if(event.keyCode == 40 && $scope.typehead == true){
-            console.info("Press Down Arrow");
             $scope.typeheadOpened=true;//open the typehead
             var active=$scope.getActiveTypeHead(event);
             var first_index = (active == -1) || (active == ($scope.data.length-1))?(0):(active + 1);
@@ -200,6 +199,18 @@
          }
 
 
+    };
+
+        /**
+         * This function is fired to help handle on blur on our input which should only occur when the user loses focus on the input
+         * this helps handle when the user loses focus just wait small and close it and when user click on it dont hide it on time wait for
+         * specified time
+         */
+    $scope.onblur=function () {
+        $timeout(function () {
+            $scope.typeheadOpened=false;
+            $scope.isFocus=false;
+        },300);
     };
 
         /**
@@ -417,7 +428,7 @@
 
 
     //inject into our controller required dependencies
-    controllerFunction.$inject=['$scope','$filter','$log'];
+    controllerFunction.$inject=['$scope','$filter','$log','$timeout'];
 
 
     var directive = function () { 

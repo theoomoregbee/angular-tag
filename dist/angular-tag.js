@@ -60,7 +60,7 @@
      * @param $scope
      * @param $filter
      */
-    var controllerFunction=function ($scope,$filter,$log) {
+    var controllerFunction=function ($scope,$filter,$log,$timeout) {
         $scope.hasError=false;//when there is error while entrying record
         $scope.delimiter=data_init($scope.delimiter,[',']);//used in specifying which separator to use or use default ,
         $scope.data = data_init($scope.data,[]);
@@ -185,7 +185,6 @@
 
         // when the user press the down button and typehead is true activate our type head to show and move down the list
         if(event.keyCode == 40 && $scope.typehead == true){
-            console.info("Press Down Arrow");
             $scope.typeheadOpened=true;//open the typehead
             var active=$scope.getActiveTypeHead(event);
             var first_index = (active == -1) || (active == ($scope.data.length-1))?(0):(active + 1);
@@ -200,6 +199,18 @@
          }
 
 
+    };
+
+        /**
+         * This function is fired to help handle on blur on our input which should only occur when the user loses focus on the input
+         * this helps handle when the user loses focus just wait small and close it and when user click on it dont hide it on time wait for
+         * specified time
+         */
+    $scope.onblur=function () {
+        $timeout(function () {
+            $scope.typeheadOpened=false;
+            $scope.isFocus=false;
+        },300);
     };
 
         /**
@@ -417,7 +428,7 @@
 
 
     //inject into our controller required dependencies
-    controllerFunction.$inject=['$scope','$filter','$log'];
+    controllerFunction.$inject=['$scope','$filter','$log','$timeout'];
 
 
     var directive = function () { 
@@ -471,4 +482,4 @@
           .directive('focusMe',directive_focus) ;
 }());
 
-angular.module('angular-tag/templates', []).run(['$templateCache', function($templateCache) {$templateCache.put('angular-tag/templates/input.html','<div id="main-tag">\r\n<div class="tag-container">\r\n <ul ng-class="[\'tag\',{focus:isFocus},theme ]" ng-click="isFocus=true" ng-keydown="direction_keys($event)">\r\n    <li ng-repeat="select in selected" ng-click="(moveToTag($event,$index)) ">\r\n      {{select[displayField]}}  <a href="javascript:void(0)" ng-click="remove(select)">&times;</a>\r\n    </li>\r\n<li>\r\n    <input ng-class="{error:hasError}" ng-model="input" ng-keyup="on_input_keyup($event)" ng-keydown="on_input_keydown($event)" ng-focus="isFocus=true" ng-blur="isFocus=false" focus-me="isFocus"\r\n         type="input" placeholder="{{placeholder}}"  >\r\n</li>\r\n </ul>\r\n</div>\r\n\r\n<ul class="tag-typehead" ng-show="(input.length && typehead && results.length) || (typehead && typeheadOpened) " >\r\n    <li class="animate-repeat" ng-repeat="item in data | filter:input as results">\r\n       <a href="javascript:void(0)" ng-click="processor(item[displayField])">{{item[displayField]}}</a>\r\n    </li>\r\n    <!--<li class="animate-repeat" ng-if="results.length == 0">\r\n        <strong>No results found...</strong>\r\n    </li>-->\r\n</ul>\r\n</div>');}]);
+angular.module('angular-tag/templates', []).run(['$templateCache', function($templateCache) {$templateCache.put('angular-tag/templates/input.html','<div id="main-tag">\r\n<div class="tag-container">\r\n <ul ng-class="[\'tag\',{focus:isFocus},theme ]" ng-click="isFocus=true" ng-keydown="direction_keys($event)">\r\n    <li ng-repeat="select in selected" ng-click="(moveToTag($event,$index)) ">\r\n      {{select[displayField]}}  <a href="javascript:void(0)" ng-click="remove(select)">&times;</a>\r\n    </li>\r\n<li>\r\n    <input ng-class="{error:hasError}" ng-model="input" ng-keyup="on_input_keyup($event)" ng-keydown="on_input_keydown($event)" ng-focus="isFocus=true" ng-blur="onblur();" focus-me="isFocus"\r\n         type="input" placeholder="{{placeholder}}"  >\r\n</li>\r\n </ul>\r\n</div>\r\n\r\n<ul class="tag-typehead" ng-show="(isFocus && input.length && typehead && results.length) || (typehead && typeheadOpened) " >\r\n    <li class="animate-repeat" ng-repeat="item in data | filter:input as results">\r\n       <a href="javascript:void(0)" ng-click="processor(item[displayField])">{{item[displayField]}}</a>\r\n    </li>\r\n    <!--<li class="animate-repeat" ng-if="results.length == 0">\r\n        <strong>No results found...</strong>\r\n    </li>-->\r\n</ul>\r\n</div>');}]);
