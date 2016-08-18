@@ -193,17 +193,9 @@
             return;
         }
 
-        // when the user press the up button and typehead is true activate our type head to show and move up the list
+        // when the user press the up button and typehead is true activate our type head to show
          if(event.keyCode == 38 && $scope.typehead == true){
-                console.info("Press Up Arrow");
                 $scope.typeheadOpened=true;//open the typehead
-                var active=$scope.getActiveTypeHead(event);
-               var last_index = (active==-1) || (active==0)?($scope.data.length-1):(active-1);
-
-             console.log("active:", active);
-             console.log("last_index:", last_index);
-
-                $scope.moveToTagTypeHead(event,last_index);
                 return;
          }
 
