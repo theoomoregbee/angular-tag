@@ -105,9 +105,9 @@
     font-size: 89%;
     padding-right: 0.625em;
     vertical-align: baseline;
-
-    line-height: 1;
+    text-align: center;
     display: inline-block;
+    display: -moz-groupbox;
 }
 
 .tag-container ul li:not(:last-child):hover
