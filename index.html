@@ -22,7 +22,13 @@
       <h1>
 <a id="angular-tag" class="anchor" href="#angular-tag" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>angular-tag</h1>
 
-<p>Tags input directive for AngularJS. Check out the ReadMe on  <a href="https://github.com/theo4u/angular-tag">angular-tag website</a> for more information.</p>
+<p><a href="https://travis-ci.org/theo4u/angular-tag"><img src="https://travis-ci.org/theo4u/angular-tag.svg?branch=master" alt="Build Status"></a> 
+<a href=""><img src="https://img.shields.io/david/dev/theo4u/angular-tag.svg" alt="David"></a>
+<a href="https://www.npmjs.com/package/angular-tag"><img src="https://img.shields.io/npm/v/angular-tag.svg" alt="npm"></a> <a href="http://bower.io/search/?q=angular-tag"><img src="https://img.shields.io/bower/v/angular-tag.svg" alt="Bower"></a></p>
+
+<p>Tags input directive for AngularJS. Check out the ReadMe on  <a href="http://theo4u.github.io/angular-tag/">angular-tag website</a> for more information.</p>
+
+<p><img src="https://www.googledrive.com/host/0B9WhZZgFzvoBamRRTFlXc19JRXc" alt="angular-tag"></p>
 
 <h2>
 <a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements</h2>
@@ -75,8 +81,7 @@
 <span class="pl-s1">  &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>bower_components/angular/angular.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
 <span class="pl-s1">  &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>bower_components/angular-animate/angular-animate.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
 <span class="pl-s1">  &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>dist/angular-tag.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
-  &lt;<span class="pl-ent">link</span> <span class="pl-e">rel</span>=<span class="pl-s"><span class="pl-pds">"</span>stylesheet<span class="pl-pds">"</span></span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>dist/angular-tag.min.css<span class="pl-pds">"</span></span>&gt;
-  &lt;/<span class="pl-ent">link</span>&gt;
+  &lt;<span class="pl-ent">link</span> <span class="pl-e">rel</span>=<span class="pl-s"><span class="pl-pds">"</span>stylesheet<span class="pl-pds">"</span></span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>dist/angular-tag.min.css<span class="pl-pds">"</span></span>/&gt;
 
 <span class="pl-s1">     &lt;<span class="pl-ent">script</span>&gt;</span>
 <span class="pl-s1">         <span class="pl-smi">angular</span>.<span class="pl-en">module</span>(<span class="pl-s"><span class="pl-pds">'</span>example<span class="pl-pds">'</span></span>,[<span class="pl-s"><span class="pl-pds">'</span>ngAnimate<span class="pl-pds">'</span></span>,<span class="pl-s"><span class="pl-pds">'</span>angular-tag<span class="pl-pds">'</span></span>])</span>
@@ -85,16 +90,13 @@
 <span class="pl-s1">      <span class="pl-smi">$scope</span>.<span class="pl-c1">data</span><span class="pl-k">=</span>[{texti<span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">'</span>Jss1<span class="pl-pds">'</span></span>,added<span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">'</span>test<span class="pl-pds">'</span></span>},{texti<span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">'</span>Jss2<span class="pl-pds">'</span></span>,add<span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">'</span>test3<span class="pl-pds">'</span></span>},{texti<span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">'</span>Jss3<span class="pl-pds">'</span></span>,value<span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">'</span>owk<span class="pl-pds">'</span></span>}];</span>
 <span class="pl-s1">      <span class="pl-smi">$scope</span>.<span class="pl-c1">selected</span><span class="pl-k">=</span>[];</span>
 <span class="pl-s1"></span>
-<span class="pl-s1">      <span class="pl-smi">$scope</span>.<span class="pl-en">$on</span>(<span class="pl-s"><span class="pl-pds">'</span>tagAdded<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> (<span class="pl-c1">event</span>, <span class="pl-smi">data</span>) {</span>
-<span class="pl-s1">      <span class="pl-en">console</span>.<span class="pl-c1">log</span>(data); <span class="pl-c">// 'Some data'</span></span>
-<span class="pl-s1">      });</span>
+<span class="pl-s1">               <span class="pl-smi">$scope</span>.<span class="pl-smi">max</span><span class="pl-k">=</span><span class="pl-c1">2</span>; <span class="pl-c">//set the maximum number of tag entry</span></span>
+<span class="pl-s1">               <span class="pl-smi">$scope</span>.<span class="pl-smi">delimiter</span><span class="pl-k">=</span>[<span class="pl-s"><span class="pl-pds">"</span>,<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>x<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>-<span class="pl-pds">"</span></span>];</span>
 <span class="pl-s1"></span>
-<span class="pl-s1">      <span class="pl-smi">$scope</span>.<span class="pl-en">$on</span>(<span class="pl-s"><span class="pl-pds">'</span>tagRemoved<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> (<span class="pl-c1">event</span>, <span class="pl-smi">data</span>) {</span>
-<span class="pl-s1">      <span class="pl-en">console</span>.<span class="pl-c1">log</span>(data); <span class="pl-c">// 'Some data'</span></span>
-<span class="pl-s1">      <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-c1">event</span>);</span>
-<span class="pl-s1">      <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-smi">$scope</span>.<span class="pl-c1">selected</span>)</span>
-<span class="pl-s1">      });</span>
-<span class="pl-s1"></span>
+<span class="pl-s1">        <span class="pl-smi">$scope</span>.<span class="pl-en">tagUpdated</span><span class="pl-k">=</span><span class="pl-k">function</span> (<span class="pl-c1">event</span>) {</span>
+<span class="pl-s1">                  <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-s"><span class="pl-pds">"</span>Event:<span class="pl-pds">"</span></span><span class="pl-k">+</span><span class="pl-c1">event</span>.<span class="pl-c1">action</span>);</span>
+<span class="pl-s1">                  <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-c1">event</span>.<span class="pl-smi">item</span>);</span>
+<span class="pl-s1">               };</span>
 <span class="pl-s1">      })</span>
 <span class="pl-s1">     &lt;/<span class="pl-ent">script</span>&gt;</span>
   &lt;/<span class="pl-ent">head</span>&gt;
@@ -102,11 +104,27 @@
   &lt;<span class="pl-ent">p</span>&gt;Tag Me&lt;/<span class="pl-ent">p</span>&gt;
   &lt;<span class="pl-ent">p</span>&gt;Data: {{data}}&lt;/<span class="pl-ent">p</span>&gt;
   &lt;<span class="pl-ent">p</span>&gt;Selected: {{selected}}&lt;/<span class="pl-ent">p</span>&gt;
-
-  &lt;<span class="pl-ent">tag</span><span class="pl-e">-me</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>input<span class="pl-pds">"</span></span> <span class="pl-e">data</span>=<span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span> <span class="pl-e">selected</span>=<span class="pl-s"><span class="pl-pds">"</span>selected<span class="pl-pds">"</span></span> <span class="pl-e">display-field</span>=<span class="pl-s"><span class="pl-pds">"</span>texti<span class="pl-pds">"</span></span> <span class="pl-e">typehead</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> <span class="pl-e">theme</span>=<span class="pl-s"><span class="pl-pds">"</span>material<span class="pl-pds">"</span></span>  <span class="pl-e">allow-outside-data-set</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> <span class="pl-e">same-input</span>=<span class="pl-s"><span class="pl-pds">"</span>false<span class="pl-pds">"</span></span>&gt;test&lt;/<span class="pl-ent">tag</span><span class="pl-e">-me</span>&gt;
+  &lt;<span class="pl-ent">p</span>&gt;Max Selected Allowed: {{selected.length+" in "+max}}&lt;/<span class="pl-ent">p</span>&gt;
+  &lt;<span class="pl-ent">tag</span><span class="pl-e">-me</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>input<span class="pl-pds">"</span></span>
+          <span class="pl-e">data</span>=<span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span> <span class="pl-e">selected</span>=<span class="pl-s"><span class="pl-pds">"</span>selected<span class="pl-pds">"</span></span>
+          <span class="pl-e">display-field</span>=<span class="pl-s"><span class="pl-pds">"</span>texti<span class="pl-pds">"</span></span>
+          <span class="pl-e">theme</span>=<span class="pl-s"><span class="pl-pds">"</span>material<span class="pl-pds">"</span></span>
+           <span class="pl-e">max</span>=<span class="pl-s"><span class="pl-pds">"</span>max<span class="pl-pds">"</span></span> <span class="pl-e">delimiter</span>=<span class="pl-s"><span class="pl-pds">"</span>delimiter<span class="pl-pds">"</span></span>
+          <span class="pl-e">on-tag-maximum</span>=<span class="pl-s"><span class="pl-pds">"</span>tagUpdated(event)<span class="pl-pds">"</span></span>
+          <span class="pl-e">on-tag-added</span>=<span class="pl-s"><span class="pl-pds">"</span>tagUpdated(event)<span class="pl-pds">"</span></span>
+          <span class="pl-e">on-tag-removed</span>=<span class="pl-s"><span class="pl-pds">"</span>tagUpdated(event)<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">tag</span><span class="pl-e">-me</span>&gt;
 
   &lt;<span class="pl-ent">p</span> <span class="pl-e">ng-init</span>=<span class="pl-s"><span class="pl-pds">"</span>selectedi=[{text:'Test'},{text:'three'}]<span class="pl-pds">"</span></span>&gt;Selected: {{selectedi}}&lt;/<span class="pl-ent">p</span>&gt;
-  &lt;<span class="pl-ent">tag</span><span class="pl-e">-me</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>input<span class="pl-pds">"</span></span> <span class="pl-e">data</span>=<span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span> <span class="pl-e">selected</span>=<span class="pl-s"><span class="pl-pds">"</span>selectedi<span class="pl-pds">"</span></span> <span class="pl-e">placeholder</span>=<span class="pl-s"><span class="pl-pds">"</span>your own placeholder<span class="pl-pds">"</span></span>  <span class="pl-e">typehead</span>=<span class="pl-s"><span class="pl-pds">"</span>false<span class="pl-pds">"</span></span> <span class="pl-e">allow-outside-data-set</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> <span class="pl-e">same-input</span>=<span class="pl-s"><span class="pl-pds">"</span>false<span class="pl-pds">"</span></span>&gt;test&lt;/<span class="pl-ent">tag</span><span class="pl-e">-me</span>&gt;
+  &lt;<span class="pl-ent">tag</span><span class="pl-e">-me</span>
+          <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>input<span class="pl-pds">"</span></span>   <span class="pl-e">selected</span>=<span class="pl-s"><span class="pl-pds">"</span>selectedi<span class="pl-pds">"</span></span>
+          <span class="pl-e">placeholder</span>=<span class="pl-s"><span class="pl-pds">"</span>your own placeholder<span class="pl-pds">"</span></span>
+          <span class="pl-e">typehead</span>=<span class="pl-s"><span class="pl-pds">"</span>false<span class="pl-pds">"</span></span> <span class="pl-e">allow-outside-data-set</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span>
+          <span class="pl-e">same-input</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span>
+          <span class="pl-e">on-tag-added</span>=<span class="pl-s"><span class="pl-pds">"</span>tagUpdated(event)<span class="pl-pds">"</span></span>
+          <span class="pl-e">on-tag-removed</span>=<span class="pl-s"><span class="pl-pds">"</span>tagUpdated(event)<span class="pl-pds">"</span></span>
+          <span class="pl-e">on-tag-active</span>=<span class="pl-s"><span class="pl-pds">"</span>tagUpdated(event)<span class="pl-pds">"</span></span>
+  &gt;
+  &lt;/<span class="pl-ent">tag</span><span class="pl-e">-me</span>&gt;
 
   &lt;/<span class="pl-ent">body</span>&gt;
   &lt;/<span class="pl-ent">html</span>&gt;</pre></div>
@@ -126,7 +144,7 @@
 <h3>
 <a id="type" class="anchor" href="#type" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>type</h3>
 
-<pre><code>for the now the type is just for `input`
+<pre><code>for now the type is just for `input`
 </code></pre>
 
 <h3>
@@ -183,15 +201,28 @@ when typing or when adding tag, default if not specified uses the `text` object 
 and always uses `Enter Key` along side
 </code></pre>
 
+<h3>
+<a id="max" class="anchor" href="#max" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>max</h3>
+
+<pre><code>max is used in limiting users of the number of tag that can be created , default it allows for infinity entry of tag when not specified
+</code></pre>
+
 <h2>
 <a id="events" class="anchor" href="#events" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Events</h2>
 
-<p>The directive emits two events which is when a tag is added and when a tag is removed</p>
+<p>The directive handles 4 types of events <strong>action</strong> which is listed below and a second parameter <strong>item</strong>. Each of the event uses a directive attribute to handle each of them like this <strong>on-tag-removed='eventHandle(event)'</strong> where <code>event.action</code> is the name of the event listed below</p>
 
-<div class="highlight highlight-source-shell"><pre>        tagAdded //emitted with the added item to the parent scope
-        tagRemoved //emitted with the removed item to the parent Scope</pre></div>
+<div class="highlight highlight-source-shell"><pre>        onTagAdded //this is send along the added item object
+        onTagRemoved //this also send along the item object removed 
+        onTagActive //this also send along the selected active selected tag
+        onTagMaximum //this event is also triggered with the input typed returned too</pre></div>
 
-<p>Used in the example html above</p>
+<p>and <code>event.item</code> is the tag object or accompany parameter. Used in the example html above</p>
+
+<h2>
+<a id="demo" class="anchor" href="#demo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Demo</h2>
+
+<p>You can see the directive in action in the <a href="http://theo4u.github.io/angular-tag/">demo page</a>.</p>
 
 <h2>
 <a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributing</h2>
@@ -204,9 +235,9 @@ and always uses `Enter Key` along side
 <ol>
 <li>Install Node.js (0.10.22 or higher)</li>
 <li>
-<p>Install <code>grunt-cli</code> globally</p>
+<p>Install <code>gulp v4</code> globally</p>
 
-<pre><code>npm install -g grunt-cli karma-cli
+<pre><code>npm install -g 'gulpjs/gulp.git#4.0' karma-cli
 </code></pre>
 </li>
 <li>
@@ -241,7 +272,7 @@ bower install
 
 <p>You can build angular-tag with a single command:</p>
 
-<pre><code>grunt build
+<pre><code>gulp build
 </code></pre>
 
 <p>That performs all tasks needed to produce the final JavaScript and CSS files. After the build completes, a folder named <code>dist</code> will be generated containing the following files:</p>
@@ -257,10 +288,10 @@ angular-tag.min.css
 
 <p>You can run it using the task below, which would run and watch any changes to our .js and .css and anything inside the <strong>template</strong> folder</p>
 
-<pre><code>grunt serve
+<pre><code>gulp serve
 </code></pre>
 
-<p>The task above would run and listen for any js and run the <code>grunt build-js</code> or <code>grunt build-css</code> or <code>grunt template-build</code> for css and template respectively</p>
+<p>The task above would run and listen for any js and run the <code>gulp build-js</code> or <code>gulp build-css</code> or <code>gulp template-build</code> for css and template respectively</p>
 
 <h2>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
