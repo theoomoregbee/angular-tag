@@ -53,8 +53,7 @@ var app = angular.module('myModule', ['angular-tag']);
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-animate/angular-animate.js"></script>
   <script src="dist/angular-tag.min.js"></script>
-  <link rel="stylesheet" href="dist/angular-tag.min.css">
-  </link>
+  <link rel="stylesheet" href="dist/angular-tag.min.css"/>
   
      <script>
          angular.module('example',['ngAnimate','angular-tag'])
@@ -63,16 +62,13 @@ var app = angular.module('myModule', ['angular-tag']);
       $scope.data=[{texti:'Jss1',added:'test'},{texti:'Jss2',add:'test3'},{texti:'Jss3',value:'owk'}];
       $scope.selected=[];
   
-      $scope.$on('tagAdded', function (event, data) {
-      console.log(data); // 'Some data'
-      });
+               $scope.max=2; //set the maximum number of tag entry
+               $scope.delimiter=[",","x","-"];
   
-      $scope.$on('tagRemoved', function (event, data) {
-      console.log(data); // 'Some data'
-      console.log(event);
-      console.log($scope.selected)
-      });
-   
+        $scope.tagUpdated=function (event) {
+                  console.log("Event:"+event.action);
+                  console.log(event.item);
+               };
       })
      </script>
   </head>
@@ -80,11 +76,27 @@ var app = angular.module('myModule', ['angular-tag']);
   <p>Tag Me</p>
   <p>Data: {{data}}</p>
   <p>Selected: {{selected}}</p>
-  
-  <tag-me type="input" data="data" selected="selected" display-field="texti" typehead="true" theme="material"  allow-outside-data-set="true" same-input="false">test</tag-me>
+  <p>Max Selected Allowed: {{selected.length+" in "+max}}</p>
+  <tag-me type="input"
+          data="data" selected="selected"
+          display-field="texti"
+          theme="material"
+           max="max" delimiter="delimiter"
+          on-tag-maximum="tagUpdated(event)"
+          on-tag-added="tagUpdated(event)"
+          on-tag-removed="tagUpdated(event)"></tag-me>
   
   <p ng-init="selectedi=[{text:'Test'},{text:'three'}]">Selected: {{selectedi}}</p>
-  <tag-me type="input" data="data" selected="selectedi" placeholder="your own placeholder"  typehead="false" allow-outside-data-set="true" same-input="false">test</tag-me>
+  <tag-me
+          type="input"   selected="selectedi"
+          placeholder="your own placeholder"
+          typehead="false" allow-outside-data-set="true"
+          same-input="true"
+          on-tag-added="tagUpdated(event)"
+          on-tag-removed="tagUpdated(event)"
+          on-tag-active="tagUpdated(event)"
+  >
+  </tag-me>
   
   </body>
   </html>
@@ -119,14 +131,19 @@ The tag works separately with the options based on the value
 ### delimeter
     delimiter to separate the text entered, checks if the user hit on the delimiter activate the tag, default it uses `,` 
     and always uses `Enter Key` along side
+### max
+    max is used in limiting users of the number of tag that can be created , default it allows for infinity entry of tag when not specified
+    
 
 ## Events
- The directive emits two events which is when a tag is added and when a tag is removed
+ The directive handles 4 types of events **action** which is listed below and a second parameter **item**. Each of the event uses a directive attribute to handle each of them like this **on-tag-removed='eventHandle(event)'** where `event.action` is the name of the event listed below
 ```bash
-        tagAdded //emitted with the added item to the parent scope
-        tagRemoved //emitted with the removed item to the parent Scope
+        onTagAdded //this is send along the added item object
+        onTagRemoved //this also send along the item object removed 
+        onTagActive //this also send along the selected active selected tag
+        onTagMaximum //this event is also triggered with the input typed returned too
 ```
-Used in the example html above
+ and `event.item` is the tag object or accompany parameter. Used in the example html above
  
 ## Demo
  

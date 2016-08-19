@@ -28,6 +28,7 @@
  *          4. tag-maximum same as above this is calls onTagMaximum when the selected tags count hits its maximum specified in the $scope.max
  *
  * Delimiter can be array of delimiters[default=','] or enter key which is default for the system to use despite the delimiters
+ * Max helps in monitoring how many tag is added or selected
  *
  * You can delete tag by Either
  *          1. Backspace
