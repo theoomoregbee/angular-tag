@@ -1,7 +1,7 @@
 {
   "name": "angular-tag",
   "description": "Angular Tagging, to tag inputs",
-  "main": "angular-tag.js",
+  "main": ["angular-tag.js","angular-tag.css"],
   "authors": [
     "Theophilus Omoregbee <theo4u@ymail.com>"
   ],
