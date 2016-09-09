@@ -15,7 +15,7 @@
  * data set use the object in the data set and add it to our selected data set
  * else if  not in our data set then use the $scope.default_input={text:input}
  *
- * required is only triggered when the required field is true and the selected tag is empty throw required on the input
+ *
  *
  * Ability to style it , but comes with two styled themes
  *          1. Material
@@ -68,7 +68,6 @@
         $scope.selected=data_init($scope.selected,[]);
         $scope.allowOutsideDataSet=data_init($scope.allowOutsideDataSet,false);
         $scope.sameInput=data_init($scope.sameInput,false);
-        $scope.required=data_init($scope.required,false);
         $scope.default_input={};//default view when a new object is added i.e when
         $scope.theme=data_init($scope.theme,'default');
         $scope.typehead=data_init($scope.typehead,true);//used in displaying type head or not
@@ -448,8 +447,7 @@
                 onTagRemoved:'&',//event is passed via to the function to the directive to be called anytime we remove from the tag
                 onTagActive:'&',//event is passed via to the function to the directive to be called anytime a tag is active
                 max:'=?',//max tag that can be allowed
-                onTagMaximum:'&',//event called when the tag hits its maximum number of allowable input
-                required:'=?'//default false.if the input is required or not , and this is used when the input is empty and the selected is empty
+                onTagMaximum:'&'//event called when the tag hits its maximum number of allowable input
             },
             templateUrl: function(elem, attr){
                 return 'angular-tag/templates/'+attr.type+'.html';
@@ -481,3 +479,6 @@
     module.directive('tagMe', directive)
           .directive('focusMe',directive_focus) ;
 }());
+
+angular.module('angular-tag/templates', []).run(['$templateCache', function($templateCache) {$templateCache.put('angular-tag/templates/input.html','<div id="main-tag">\r\n<div class="tag-container">\r\n <ul ng-class="[\'tag\',{focus:isFocus},theme ]" ng-click="isFocus=true" ng-keydown="direction_keys($event)">\r\n    <li ng-repeat="select in selected" ng-click="(moveToTag($event,$index)) ">\r\n      {{select[displayField]}}  <a href="javascript:void(0)" ng-click="remove(select)">&times;</a>\r\n    </li>\r\n<li>\r\n    <input ng-class="{error:hasError}" ng-model="input" ng-keyup="on_input_keyup($event)" ng-keydown="on_input_keydown($event)" ng-focus="isFocus=true" ng-blur="onblur();" focus-me="isFocus"\r\n         type="input" placeholder="{{placeholder}}"  >\r\n</li>\r\n </ul>\r\n</div>\r\n\r\n<ul class="tag-typehead" ng-show="(isFocus && input.length && typehead && results.length) || (typehead && typeheadOpened) " >\r\n    <li class="animate-repeat" ng-repeat="item in data | filter:input as results">\r\n       <a href="javascript:void(0)" ng-click="processor(item[displayField])">{{item[displayField]}}</a>\r\n    </li>\r\n    <!--<li class="animate-repeat" ng-if="results.length == 0">\r\n        <strong>No results found...</strong>\r\n    </li>-->\r\n</ul>\r\n</div>');}]);
+angular.module('angular-tag/templates', []).run(['$templateCache', function($templateCache) {$templateCache.put('angular-tag/templates/input.html','<div id="main-tag">\r\n<div class="tag-container">\r\n <ul ng-class="[\'tag\',{focus:isFocus},theme ]" ng-click="isFocus=true" ng-keydown="direction_keys($event)">\r\n    <li ng-repeat="select in selected" ng-click="(moveToTag($event,$index)) ">\r\n      {{select[displayField]}}  <a href="javascript:void(0)" ng-click="remove(select)">&times;</a>\r\n    </li>\r\n<li>\r\n    <input ng-class="{error:hasError}" ng-model="input" ng-keyup="on_input_keyup($event)" ng-keydown="on_input_keydown($event)" ng-focus="isFocus=true" ng-blur="onblur();" focus-me="isFocus"\r\n         type="input" placeholder="{{placeholder}}"  >\r\n</li>\r\n </ul>\r\n</div>\r\n\r\n<ul class="tag-typehead" ng-show="(isFocus && input.length && typehead && results.length) || (typehead && typeheadOpened) " >\r\n    <li class="animate-repeat" ng-repeat="item in data | filter:input as results">\r\n       <a href="javascript:void(0)" ng-click="processor(item[displayField])">{{item[displayField]}}</a>\r\n    </li>\r\n    <!--<li class="animate-repeat" ng-if="results.length == 0">\r\n        <strong>No results found...</strong>\r\n    </li>-->\r\n</ul>\r\n</div>');}]);

@@ -38,7 +38,8 @@
          max="max" delimiter="delimiter"
         on-tag-maximum="tagUpdated(event)"
         on-tag-added="tagUpdated(event)"
-        on-tag-removed="tagUpdated(event)"></tag-me>
+        on-tag-removed="tagUpdated(event)"
+        ></tag-me>
 
 <p ng-init="selectedi=[{text:'Test'},{text:'three'}]">Selected: {{selectedi}}</p>
 <tag-me
@@ -52,6 +53,23 @@
 >
 
 </tag-me>
+
+<br>
+<p><strong>Using Required in Form Instance</strong></p>
+<form action="">
+    <tag-me type="input"
+            data="data" selected="selected"
+            display-field="texti"
+            theme="material"
+            max="max" delimiter="delimiter"
+            on-tag-maximum="tagUpdated(event)"
+            on-tag-added="tagUpdated(event)"
+            on-tag-removed="tagUpdated(event)"
+            required="true"
+    ></tag-me>
+
+    <button type="submit">Save</button>
+</form>
 
 </body>
 </html>
