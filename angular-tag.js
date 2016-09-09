@@ -447,7 +447,8 @@
                 onTagRemoved:'&',//event is passed via to the function to the directive to be called anytime we remove from the tag
                 onTagActive:'&',//event is passed via to the function to the directive to be called anytime a tag is active
                 max:'=?',//max tag that can be allowed
-                onTagMaximum:'&'//event called when the tag hits its maximum number of allowable input
+                onTagMaximum:'&',//event called when the tag hits its maximum number of allowable input
+                required:'=?'//if the input is required or not , and this is used when the input is empty and the selected is empty
             },
             templateUrl: function(elem, attr){
                 return 'angular-tag/templates/'+attr.type+'.html';
