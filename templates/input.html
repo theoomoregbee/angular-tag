@@ -6,7 +6,7 @@
     </li>
 <li>
     <input ng-class="{error:hasError}" ng-model="input" ng-keyup="on_input_keyup($event)" ng-keydown="on_input_keydown($event)" ng-focus="isFocus=true" ng-blur="onblur();" focus-me="isFocus"
-         type="input" placeholder="{{placeholder}}"  >
+         type="input" placeholder="{{placeholder}}" ng-required="required && (!selected.length || selected.length==0)" >
 </li>
  </ul>
 </div>

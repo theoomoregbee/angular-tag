@@ -15,7 +15,7 @@
  * data set use the object in the data set and add it to our selected data set
  * else if  not in our data set then use the $scope.default_input={text:input}
  *
- *
+ * required is only triggered when the required field is true and the selected tag is empty throw required on the input
  *
  * Ability to style it , but comes with two styled themes
  *          1. Material
@@ -68,6 +68,7 @@
         $scope.selected=data_init($scope.selected,[]);
         $scope.allowOutsideDataSet=data_init($scope.allowOutsideDataSet,false);
         $scope.sameInput=data_init($scope.sameInput,false);
+        $scope.required=data_init($scope.required,false);
         $scope.default_input={};//default view when a new object is added i.e when
         $scope.theme=data_init($scope.theme,'default');
         $scope.typehead=data_init($scope.typehead,true);//used in displaying type head or not
@@ -448,7 +449,7 @@
                 onTagActive:'&',//event is passed via to the function to the directive to be called anytime a tag is active
                 max:'=?',//max tag that can be allowed
                 onTagMaximum:'&',//event called when the tag hits its maximum number of allowable input
-                required:'=?'//if the input is required or not , and this is used when the input is empty and the selected is empty
+                required:'=?'//default false.if the input is required or not , and this is used when the input is empty and the selected is empty
             },
             templateUrl: function(elem, attr){
                 return 'angular-tag/templates/'+attr.type+'.html';
