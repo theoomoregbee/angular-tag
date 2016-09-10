@@ -26,16 +26,9 @@
 <a href=""><img src="https://img.shields.io/david/dev/theo4u/angular-tag.svg" alt="David"></a>
 <a href="https://www.npmjs.com/package/angular-tag"><img src="https://img.shields.io/npm/v/angular-tag.svg" alt="npm"></a> <a href="http://bower.io/search/?q=angular-tag"><img src="https://img.shields.io/bower/v/angular-tag.svg" alt="Bower"></a></p>
 
-<p>Tags input directive for AngularJS. Check out the ReadMe below </p>
+<p>Tags input directive for AngularJS. Check out the ReadMe on  <a href="http://theo4u.github.io/angular-tag/">angular-tag website</a> for more information.</p>
 
-        <!--Our App runs here-->
-        <iframe name="viewframe" style="border: 1px solid #999;width: 100%; height: 500px"
-                src="https://embed.plnkr.co/940ITW" frameborder="0"
-                allowfullscreen="allowfullscreen">
-        </iframe>
-
-
-        <p><img src="https://www.googledrive.com/host/0B9WhZZgFzvoBamRRTFlXc19JRXc" alt="angular-tag"></p>
+<p><img src="https://www.googledrive.com/host/0B9WhZZgFzvoBamRRTFlXc19JRXc" alt="angular-tag"></p>
 
 <h2>
 <a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements</h2>
@@ -78,8 +71,7 @@
 <h2>
 <a id="example" class="anchor" href="#example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h2>
 
-<p><code>/example.html</code> on <a href="https://embed.plnkr.co/940ITW">plnkr</a></p>
-
+<p><code>/example.html</code> check the plunker above</p>
 
 <h2>
 <a id="options" class="anchor" href="#options" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Options</h2>
@@ -157,6 +149,18 @@ and always uses `Enter Key` along side
 <a id="max" class="anchor" href="#max" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>max</h3>
 
 <pre><code>max is used in limiting users of the number of tag that can be created , default it allows for infinity entry of tag when not specified
+</code></pre>
+
+<h3>
+<a id="required" class="anchor" href="#required" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>required</h3>
+
+<pre><code>this is used when form validation is required to valid if a tag is selected and the input is empty too , then it makes the form $dirty. check the 3rd tag-me in the _example.html_ above
+</code></pre>
+
+<h3>
+<a id="name" class="anchor" href="#name" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>name</h3>
+
+<pre><code>this is used along side **required** which is used in targetting a particular tag-me directive in the page in the case of many tag-me , default value is **tagMe**
 </code></pre>
 
 <h2>
