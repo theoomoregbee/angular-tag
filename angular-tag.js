@@ -16,6 +16,7 @@
  * else if  not in our data set then use the $scope.default_input={text:input}
  *
  * required is only triggered when the required field is true and the selected tag is empty throw required on the input
+ * name is specified so as to alert the form that the input with the name is needed
  *
  * Ability to style it , but comes with two styled themes
  *          1. Material
@@ -68,15 +69,18 @@
         $scope.selected=data_init($scope.selected,[]);
         $scope.allowOutsideDataSet=data_init($scope.allowOutsideDataSet,false);
         $scope.sameInput=data_init($scope.sameInput,false);
-        $scope.required=data_init($scope.required,false);
         $scope.default_input={};//default view when a new object is added i.e when
         $scope.theme=data_init($scope.theme,'default');
         $scope.typehead=data_init($scope.typehead,true);//used in displaying type head or not
         $scope.displayField=data_init($scope.displayField,'text');//used in displaying which field inside the data set we need
         $scope.placeholder=data_init($scope.placeholder,'Enter Text with , separated');//this is helps for custom placeholder
         $scope.max=data_init($scope.max,undefined);//this is helps to allow infinity value of input tag by default
+        $scope.required=data_init($scope.required,false);
+        $scope.name=data_init($scope.name,'tagMe');//used in getting the name of our input field
+
         $scope.active_index=-1;//this hold the active selected tag index
         $scope.typeheadOpened=false;//notify and holds the true or false , depending when the typehead options is showed for selection
+
 
         /**
          * This method checks if an item(input) exist inside an array
@@ -433,6 +437,7 @@
     var directive = function () { 
         return {
             restrict: 'E',
+            require:'?^^form',//optoinal form incase the user wants required checking
             scope: {
                 type: '@',
                 theme:'@',//help to get theme to use in manipulating tag via
@@ -449,13 +454,27 @@
                 onTagActive:'&',//event is passed via to the function to the directive to be called anytime a tag is active
                 max:'=?',//max tag that can be allowed
                 onTagMaximum:'&',//event called when the tag hits its maximum number of allowable input
-                required:'=?'//default false.if the input is required or not , and this is used when the input is empty and the selected is empty
+                required:'=?',//default false.if the input is required or not , and this is used when the input is empty and the selected is empty
+                name:'@'//is needed when the required is set true
             },
             templateUrl: function(elem, attr){
                 return 'angular-tag/templates/'+attr.type+'.html';
             },
             controller: controllerFunction, //Embed a custom controller in the directive
-            link: function ($scope, element, attrs) {
+            link: function ($scope, element, attrs, form) {
+                var our_input = angular.element(element.find("input")[0]);
+                    $scope.form = data_init(form,undefined);//keep our parent form here if it is specified
+
+               our_input.bind('keyup', function ($event) { //check our input as they type for validity
+                   //here we bind form validity  if required is true
+                   if($scope.required && $scope.selected.length==0) //the form is invalid here
+                       if($scope.form){ //if the form
+                           $scope.form[our_input.attr("name")].$setValidity('required', false);
+                       }
+               });
+
+
+
             } //DOM manipulation
         };
     };

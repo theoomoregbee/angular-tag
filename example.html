@@ -55,9 +55,12 @@
 </tag-me>
 
 <br>
-<p><strong>Using Required in Form Instance</strong></p>
-<form action="">
-    <tag-me type="input"
+<p>
+    <strong>Using Required in Form Instance</strong>
+     <pre>this disables the form submit button when the form is $dirty , better use with angular form</pre>
+</p>
+<form name="formName">
+    <tag-me name="fieldName" type="input"
             data="data" selected="selected"
             display-field="texti"
             theme="material"
@@ -67,8 +70,11 @@
             on-tag-removed="tagUpdated(event)"
             required="true"
     ></tag-me>
+    <!--you error template here-->
+<span style="color: red;" ng-show="formName.fieldName.$error.required"><strong>Tag Me is Required</strong></span>
+    <!--end your error template-->
 
-    <button type="submit">Save</button>
+    <button type="submit" ng-disabled="formName.fieldName.$error.required">Save</button>
 </form>
 
 </body>

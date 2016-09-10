@@ -15,7 +15,8 @@
  * data set use the object in the data set and add it to our selected data set
  * else if  not in our data set then use the $scope.default_input={text:input}
  *
- *
+ * required is only triggered when the required field is true and the selected tag is empty throw required on the input
+ * name is specified so as to alert the form that the input with the name is needed
  *
  * Ability to style it , but comes with two styled themes
  *          1. Material
@@ -74,8 +75,12 @@
         $scope.displayField=data_init($scope.displayField,'text');//used in displaying which field inside the data set we need
         $scope.placeholder=data_init($scope.placeholder,'Enter Text with , separated');//this is helps for custom placeholder
         $scope.max=data_init($scope.max,undefined);//this is helps to allow infinity value of input tag by default
+        $scope.required=data_init($scope.required,false);
+        $scope.name=data_init($scope.name,'tagMe');//used in getting the name of our input field
+
         $scope.active_index=-1;//this hold the active selected tag index
         $scope.typeheadOpened=false;//notify and holds the true or false , depending when the typehead options is showed for selection
+
 
         /**
          * This method checks if an item(input) exist inside an array
@@ -432,6 +437,7 @@
     var directive = function () { 
         return {
             restrict: 'E',
+            require:'?^^form',//optoinal form incase the user wants required checking
             scope: {
                 type: '@',
                 theme:'@',//help to get theme to use in manipulating tag via
@@ -447,13 +453,28 @@
                 onTagRemoved:'&',//event is passed via to the function to the directive to be called anytime we remove from the tag
                 onTagActive:'&',//event is passed via to the function to the directive to be called anytime a tag is active
                 max:'=?',//max tag that can be allowed
-                onTagMaximum:'&'//event called when the tag hits its maximum number of allowable input
+                onTagMaximum:'&',//event called when the tag hits its maximum number of allowable input
+                required:'=?',//default false.if the input is required or not , and this is used when the input is empty and the selected is empty
+                name:'@'//is needed when the required is set true
             },
             templateUrl: function(elem, attr){
                 return 'angular-tag/templates/'+attr.type+'.html';
             },
             controller: controllerFunction, //Embed a custom controller in the directive
-            link: function ($scope, element, attrs) {
+            link: function ($scope, element, attrs, form) {
+                var our_input = angular.element(element.find("input")[0]);
+                    $scope.form = data_init(form,undefined);//keep our parent form here if it is specified
+
+               our_input.bind('keyup', function ($event) { //check our input as they type for validity
+                   //here we bind form validity  if required is true
+                   if($scope.required && $scope.selected.length==0) //the form is invalid here
+                       if($scope.form){ //if the form
+                           $scope.form[our_input.attr("name")].$setValidity('required', false);
+                       }
+               });
+
+
+
             } //DOM manipulation
         };
     };
@@ -480,5 +501,4 @@
           .directive('focusMe',directive_focus) ;
 }());
 
-angular.module('angular-tag/templates', []).run(['$templateCache', function($templateCache) {$templateCache.put('angular-tag/templates/input.html','<div id="main-tag">\r\n<div class="tag-container">\r\n <ul ng-class="[\'tag\',{focus:isFocus},theme ]" ng-click="isFocus=true" ng-keydown="direction_keys($event)">\r\n    <li ng-repeat="select in selected" ng-click="(moveToTag($event,$index)) ">\r\n      {{select[displayField]}}  <a href="javascript:void(0)" ng-click="remove(select)">&times;</a>\r\n    </li>\r\n<li>\r\n    <input ng-class="{error:hasError}" ng-model="input" ng-keyup="on_input_keyup($event)" ng-keydown="on_input_keydown($event)" ng-focus="isFocus=true" ng-blur="onblur();" focus-me="isFocus"\r\n         type="input" placeholder="{{placeholder}}"  >\r\n</li>\r\n </ul>\r\n</div>\r\n\r\n<ul class="tag-typehead" ng-show="(isFocus && input.length && typehead && results.length) || (typehead && typeheadOpened) " >\r\n    <li class="animate-repeat" ng-repeat="item in data | filter:input as results">\r\n       <a href="javascript:void(0)" ng-click="processor(item[displayField])">{{item[displayField]}}</a>\r\n    </li>\r\n    <!--<li class="animate-repeat" ng-if="results.length == 0">\r\n        <strong>No results found...</strong>\r\n    </li>-->\r\n</ul>\r\n</div>');}]);
-angular.module('angular-tag/templates', []).run(['$templateCache', function($templateCache) {$templateCache.put('angular-tag/templates/input.html','<div id="main-tag">\r\n<div class="tag-container">\r\n <ul ng-class="[\'tag\',{focus:isFocus},theme ]" ng-click="isFocus=true" ng-keydown="direction_keys($event)">\r\n    <li ng-repeat="select in selected" ng-click="(moveToTag($event,$index)) ">\r\n      {{select[displayField]}}  <a href="javascript:void(0)" ng-click="remove(select)">&times;</a>\r\n    </li>\r\n<li>\r\n    <input ng-class="{error:hasError}" ng-model="input" ng-keyup="on_input_keyup($event)" ng-keydown="on_input_keydown($event)" ng-focus="isFocus=true" ng-blur="onblur();" focus-me="isFocus"\r\n         type="input" placeholder="{{placeholder}}"  >\r\n</li>\r\n </ul>\r\n</div>\r\n\r\n<ul class="tag-typehead" ng-show="(isFocus && input.length && typehead && results.length) || (typehead && typeheadOpened) " >\r\n    <li class="animate-repeat" ng-repeat="item in data | filter:input as results">\r\n       <a href="javascript:void(0)" ng-click="processor(item[displayField])">{{item[displayField]}}</a>\r\n    </li>\r\n    <!--<li class="animate-repeat" ng-if="results.length == 0">\r\n        <strong>No results found...</strong>\r\n    </li>-->\r\n</ul>\r\n</div>');}]);
+angular.module('angular-tag/templates', []).run(['$templateCache', function($templateCache) {$templateCache.put('angular-tag/templates/input.html','<div id="main-tag">\n<div class="tag-container">\n <ul ng-class="[\'tag\',{focus:isFocus},theme ]" ng-click="isFocus=true" ng-keydown="direction_keys($event)">\n    <li ng-repeat="select in selected" ng-click="(moveToTag($event,$index)) ">\n      {{select[displayField]}}  <a href="javascript:void(0)" ng-click="remove(select)">&times;</a>\n    </li>\n<li>\n    <input name="{{name}}" ng-class="{error:hasError}" ng-model="input" ng-keyup="on_input_keyup($event)" ng-keydown="on_input_keydown($event)" ng-focus="isFocus=true" ng-blur="onblur();" focus-me="isFocus"\n         type="input" placeholder="{{placeholder}}" ng-required="required && (!selected.length || selected.length==0)" >\n</li>\n </ul>\n</div>\n\n<ul class="tag-typehead" ng-show="(isFocus && input.length && typehead && results.length) || (typehead && typeheadOpened) " >\n    <li class="animate-repeat" ng-repeat="item in data | filter:input as results">\n       <a href="javascript:void(0)" ng-click="processor(item[displayField])">{{item[displayField]}}</a>\n    </li>\n    <!--<li class="animate-repeat" ng-if="results.length == 0">\n        <strong>No results found...</strong>\n    </li>-->\n</ul>\n</div>');}]);
