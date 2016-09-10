@@ -97,7 +97,28 @@ var app = angular.module('myModule', ['angular-tag']);
           on-tag-active="tagUpdated(event)"
   >
   </tag-me>
-  
+  <br>
+  <p>
+      <strong>Using Required in Form Instance</strong>
+       <pre>this disables the form submit button when the form is $dirty , better use with angular form</pre>
+  </p>
+  <form name="formName">
+      <tag-me name="fieldName" type="input"
+              data="data" selected="selected"
+              display-field="texti"
+              theme="material"
+              max="max" delimiter="delimiter"
+              on-tag-maximum="tagUpdated(event)"
+              on-tag-added="tagUpdated(event)"
+              on-tag-removed="tagUpdated(event)"
+              required="true"
+      ></tag-me>
+      <!--you error template here-->
+  <span style="color: red;" ng-show="formName.fieldName.$error.required"><strong>Tag Me is Required</strong></span>
+      <!--end your error template-->
+
+      <button type="submit" ng-disabled="formName.fieldName.$error.required">Save</button>
+  </form>
   </body>
   </html>
 ```
@@ -133,7 +154,10 @@ The tag works separately with the options based on the value
     and always uses `Enter Key` along side
 ### max
     max is used in limiting users of the number of tag that can be created , default it allows for infinity entry of tag when not specified
-    
+### required
+    this is used when form validation is required to valid if a tag is selected and the input is empty too , then it makes the form $dirty. check the 3rd tag-me in the _example.html_ above
+### name
+    this is used along side **required** which is used in targetting a particular tag-me directive in the page in the case of many tag-me , default value is **tagMe**
 
 ## Events
  The directive handles 4 types of events **action** which is listed below and a second parameter **item**. Each of the event uses a directive attribute to handle each of them like this **on-tag-removed='eventHandle(event)'** where `event.action` is the name of the event listed below
