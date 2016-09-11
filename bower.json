@@ -1,7 +1,10 @@
 {
   "name": "angular-tag",
   "description": "Angular Tagging, to tag inputs",
-  "main": ["dist/angular-tag.js","dist/angular-tag.css"],
+  "main": [
+    "dist/angular-tag.js",
+    "dist/angular-tag.css"
+  ],
   "authors": [
     "Theophilus Omoregbee <theo4u@ymail.com>"
   ],
@@ -18,11 +21,14 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "templates",
+    "templates.js","gulpfile.js","example.html","travis.yml","npm-debug.log","package.json","angular-tag.js","angular-tag.css",".gitignore"
   ],
   "dependencies": {
     "angular": "^1.5.7",
-    "angular-animate": "^1.5.7"
+    "angular-animate": "^1.5.7",
+    "ng-sortable": "^1.3.6"
   },
   "version": "2.1.0"
 }
