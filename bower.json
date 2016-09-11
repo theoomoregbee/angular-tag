@@ -22,11 +22,11 @@
     "test",
     "tests",
     "templates",
-    "templates.js","gulpfile.js","example.html",".travis.yml","npm-debug.log","package.json","angular-tag.js","angular-tag.css",".gitignore"
+    "templates.js","gulpfile.js","example.html",".travis.yml","npm-debug.log","angular-tag.js","angular-tag.css",".gitignore"
   ],
   "dependencies": {
     "angular": "^1.5.7",
     "angular-animate": "^1.5.7"
   },
-  "version": "2.1.2"
+  "version": "2.1.3"
 }
