@@ -51,7 +51,7 @@
      */
     var data_init=function (variable,default_value) {
 
-        if(variable == undefined || variable == null)
+        if(variable === undefined || variable === null)
             return default_value;
         else
             return variable;
@@ -89,7 +89,7 @@
          * @returns {*}
          */
         $scope.check_data=function (array,input) {
-            return $filter('filter')(array, function(value, index) {return value[$scope.displayField] === input;})[0];
+            return $filter('filter')(array, function(value, index) {return value[$scope.displayField] == input;})[0];
         };
 
         /**
@@ -123,18 +123,18 @@
          */
         $scope.on_input_keyup=function (event) {
             var input='';
-            if($scope.input != undefined)
+            if($scope.input !== undefined)
                 input=$scope.strip_delimiters($scope.input);
                     //$log.log("striped input:"+input);
             //if user just type and uses our defined delimiter do this function
-            if ($scope.input != undefined && $scope.check_delimiter($scope.input) == true) {
-                if(input!="")
+            if ($scope.input !== undefined && $scope.check_delimiter($scope.input) === true) {
+                if(input!=="")
                     $scope.processor(input);
                 return 0;
             }
 
             //if user types and presses enter key (keyCode 13 ASCII)
-            if(event.keyCode == 13 && input != "" ) {
+            if(event.keyCode === 13 && input !== "" ) {
                    $scope.processor(input);
                 return 0;
             }
@@ -142,11 +142,11 @@
 
          //let's check if the user pressed the backspace button so we know when to enter the tag after the input i.e activate the tag as active
          //and check if the backspace is pressed and nothing to backspace then move to our last added tag
-            if(event.keyCode == 8 && input.slice(0,$scope.getCursorPosition(event.target)) == "" ){
+            if(event.keyCode === 8 && input.slice(0,$scope.getCursorPosition(event.target)) === "" ){
                // $log.info("backspace activated");
                 var last_index=$scope.selected.length-1;
                 //if backspace is clicked twice with input empty delete
-                if(last_index == $scope.active_index) {
+                if(last_index === $scope.active_index) {
                     $scope.remove($scope.selected[$scope.active_index]);
                     last_index = -1;
                 }
@@ -158,7 +158,7 @@
              
             //when the user clicked on the delete button removed the active one and if the input field delete action is dummant i.e
             //when user press it no text to remove from behind again
-            if(event.keyCode == 46 && input.slice($scope.getCursorPosition(event.target),input.length) == ""){
+            if(event.keyCode === 46 && input.slice($scope.getCursorPosition(event.target),input.length) === ""){
                 $scope.remove($scope.selected[$scope.active_index]);
             return 0;
             }
@@ -172,34 +172,34 @@
          */
     $scope.on_input_keydown=function (event) {
         var input='';
-        if($scope.input != undefined)
+        if($scope.input !== undefined)
             input=$scope.input.replace($scope.delimiter,'');
 
         //when user press the directional key left check if the cursor position is at the extreme left of the input field
-        if(event.keyCode == 37 && $scope.getCursorPosition(event.target) == 0){
-            var last_index = ($scope.active_index==-1)|| ($scope.active_index==0)?($scope.selected.length-1):($scope.active_index-1);
+        if(event.keyCode === 37 && $scope.getCursorPosition(event.target) === 0){
+            var last_index = ($scope.active_index===-1)|| ($scope.active_index===0)?($scope.selected.length-1):($scope.active_index-1);
             $scope.moveToTag(event,last_index);
             return;
         }
 
         //when user press the directional key right check if the cursor position is at the extreme right of the input field
-        if(event.keyCode == 39 && $scope.getCursorPosition(event.target) == input.length){
-            var first_index = ($scope.active_index==-1) || ($scope.active_index==($scope.selected.length-1))?(0):($scope.active_index+1);
+        if(event.keyCode === 39 && $scope.getCursorPosition(event.target) === input.length){
+            var first_index = ($scope.active_index===-1) || ($scope.active_index===($scope.selected.length-1))?(0):($scope.active_index+1);
             $scope.moveToTag(event,first_index);
             return 0;
         }
 
         // when the user press the down button and typehead is true activate our type head to show and move down the list
-        if(event.keyCode == 40 && $scope.typehead == true){
+        if(event.keyCode === 40 && $scope.typehead === true){
             $scope.typeheadOpened=true;//open the typehead
             var active=$scope.getActiveTypeHead(event);
-            var first_index = (active == -1) || (active == ($scope.data.length-1))?(0):(active + 1);
+            var first_index = (active === -1) || (active === ($scope.data.length-1))?(0):(active + 1);
             $scope.moveToTagTypeHead(event,first_index);
             return 0;
         }
 
         // when the user press the up button and typehead is true activate our type head to show
-         if(event.keyCode == 38 && $scope.typehead == true){
+         if(event.keyCode === 38 && $scope.typehead === true){
                 $scope.typeheadOpened=true;//open the typehead
                 return 0;
          }
@@ -247,7 +247,7 @@
             }
 
             // Firefox support
-            else if (oField.selectionStart || oField.selectionStart == '0')
+            else if (oField.selectionStart || oField.selectionStart === '0')
                 iCaretPos = oField.selectionStart;
 
             // Return results
@@ -262,7 +262,7 @@
          * @param input
          */
         $scope.update=function (input) {
-            if($scope.selected.length<$scope.max || $scope.max==undefined) {
+            if($scope.selected.length<$scope.max || $scope.max===undefined) {
                 $scope.selected.push(angular.copy(input));
                 $scope.input = "";
                 $scope.typeheadOpened=false;
@@ -295,7 +295,7 @@
          * @returns {*}
          */
         $scope.return_value=function (data_check,input) {
-            if(data_check == undefined){
+            if(data_check === undefined){
                 $scope.default_input[""+$scope.displayField]=input;
                 return $scope.default_input;
             }else
@@ -311,9 +311,9 @@
             var lis=angular.element(event.target.parentNode.parentNode).find('li');
             var size=lis.length;
             for(var i=0; i<size-1;i++){
-                if(i==index) {
+                if(i===index) {
                     //check if it contains active before then toggle
-                    if($scope.active_index != index) {
+                    if($scope.active_index !== index) {
                         $scope.active_index = index;
                         angular.element(lis[i]).addClass('active');
                         var event_temp={action:'active', item:$scope.selected[$scope.active_index]};
@@ -337,7 +337,7 @@
             var lis=angular.element(main_tag).find('a');
             var size=lis.length;
             for(var i=0; i<size;i++)
-                if(i==index) {
+                if(i===index) {
                     //check if it contains active before then toggle
                     angular.element(lis[i]).addClass('active');
                 }else
@@ -390,7 +390,7 @@
                 {
 
                     //then check for match in our selected data set
-                    if(selected_set_check == undefined)
+                    if(selected_set_check === undefined)
                         $scope.update($scope.return_value(data_set_check,input));
                     else
                         $scope.hasError=true;
@@ -402,7 +402,7 @@
                 if(!$scope.allowOutsideDataSet && !$scope.sameInput)
                 {
                     //then check for match in our selected data set and our main data set
-                    if(data_set_check != undefined && selected_set_check == undefined)
+                    if(data_set_check !== undefined && selected_set_check === undefined)
                         $scope.update(data_set_check);
                     else
                         $scope.hasError=true;
@@ -414,7 +414,7 @@
                 if(!$scope.allowOutsideDataSet && $scope.sameInput)
                 {
                     //then check for match in our selected data set and our main data set
-                    if(data_set_check != undefined)
+                    if(data_set_check !== undefined)
                         $scope.update(data_set_check);
                     else
                         $scope.hasError=true;
@@ -467,7 +467,7 @@
 
                our_input.bind('keyup', function ($event) { //check our input as they type for validity
                    //here we bind form validity  if required is true
-                   if($scope.required && $scope.selected.length==0) //the form is invalid here
+                   if($scope.required && $scope.selected.length===0) //the form is invalid here
                        if($scope.form){ //if the form
                            $scope.form[our_input.attr("name")].$setValidity('required', false);
                        }
