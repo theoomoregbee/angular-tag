@@ -123,18 +123,18 @@
          */
         $scope.on_input_keyup=function (event) {
             var input='';
-            if($scope.input != undefined)
+            if($scope.input !== undefined)
                 input=$scope.strip_delimiters($scope.input);
                     //$log.log("striped input:"+input);
             //if user just type and uses our defined delimiter do this function
-            if ($scope.input != undefined && $scope.check_delimiter($scope.input) === true) {
-                if(input!="")
+            if ($scope.input !== undefined && $scope.check_delimiter($scope.input) === true) {
+                if(input!=="")
                     $scope.processor(input);
                 return 0;
             }
 
             //if user types and presses enter key (keyCode 13 ASCII)
-            if(event.keyCode === 13 && input != "" ) {
+            if(event.keyCode === 13 && input !== "" ) {
                    $scope.processor(input);
                 return 0;
             }
@@ -172,7 +172,7 @@
          */
     $scope.on_input_keydown=function (event) {
         var input='';
-        if($scope.input != undefined)
+        if($scope.input !== undefined)
             input=$scope.input.replace($scope.delimiter,'');
 
         //when user press the directional key left check if the cursor position is at the extreme left of the input field
@@ -313,7 +313,7 @@
             for(var i=0; i<size-1;i++){
                 if(i===index) {
                     //check if it contains active before then toggle
-                    if($scope.active_index != index) {
+                    if($scope.active_index !== index) {
                         $scope.active_index = index;
                         angular.element(lis[i]).addClass('active');
                         var event_temp={action:'active', item:$scope.selected[$scope.active_index]};
@@ -402,7 +402,7 @@
                 if(!$scope.allowOutsideDataSet && !$scope.sameInput)
                 {
                     //then check for match in our selected data set and our main data set
-                    if(data_set_check != undefined && selected_set_check === undefined)
+                    if(data_set_check !== undefined && selected_set_check === undefined)
                         $scope.update(data_set_check);
                     else
                         $scope.hasError=true;
@@ -414,7 +414,7 @@
                 if(!$scope.allowOutsideDataSet && $scope.sameInput)
                 {
                     //then check for match in our selected data set and our main data set
-                    if(data_set_check != undefined)
+                    if(data_set_check !== undefined)
                         $scope.update(data_set_check);
                     else
                         $scope.hasError=true;
