@@ -1,7 +1,7 @@
 <div id="main-tag">
 <div class="tag-container">
  <ul ng-class="['tag',{focus:isFocus},theme ]" ng-click="isFocus=true" ng-keydown="direction_keys($event)">
-    <li ng-repeat="select in selected" ng-click="(moveToTag($event,$index)) ">
+    <li ng-repeat="select in selected" ng-click="(moveToTag($event,$index)) "  data-drop="true" data-drag="true" ng-model="selected" jqyoui-droppable="{index: {{$index}}}" jqyoui-draggable="{index: {{$index}}, insertInline: true, direction:'jqyouiDirection'}" data-jqyoui-options="{revert: 'invalid'}" data-direction="{{item.jqyouiDirection}}">
       {{select[displayField]}}  <a href="javascript:void(0)" ng-click="remove(select)">&times;</a>
     </li>
 <li>
