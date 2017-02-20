@@ -1,6 +1,6 @@
 {
   "name": "angular-tag",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "Angular Tagging, to tag inputs",
   "main": "angular-tag.js",
   "scripts": {
