@@ -51,8 +51,14 @@ var app = angular.module('myModule', ['angular-tag']);
   <head>
       <meta charset="UTF-8">
       <title>Tag Test</title>
+      <!--Dependencies for ngDragDrop-->
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+  
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-dragdrop/src/angular-dragdrop.min.js"></script>
+  
   <script src="dist/angular-tag.min.js"></script>
   <link rel="stylesheet" href="dist/angular-tag.min.css"/>
   
