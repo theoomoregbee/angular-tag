@@ -13,6 +13,7 @@ Tags input directive for AngularJS. Check out the ReadMe on  [angular-tag websit
 
 - [Angular.js 1.3+](http://angularjs.org) 
 - [ngAnimate](https://docs.angularjs.org/api/ngAnimate) (optional for typehead animation)
+- [ngDragDrop](https://github.com/codef0rmer/angular-dragdrop) (optiona, only if you need drag n drop sorting)
 
 ## Installation
 ### Add library
@@ -56,7 +57,7 @@ var app = angular.module('myModule', ['angular-tag']);
   <link rel="stylesheet" href="dist/angular-tag.min.css"/>
   
      <script>
-         angular.module('example',['ngAnimate','angular-tag'])
+         angular.module('example',['ngAnimate','angular-tag', 'ngDragDrop'])
   
            .controller('MainCtrl',function ($scope) {
       $scope.data=[{texti:'Jss1',added:'test'},{texti:'Jss2',add:'test3'},{texti:'Jss3',value:'owk'}];

@@ -3,13 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>Tag Test</title>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-dragdrop/src/angular-dragdrop.min.js"></script>
+
 <script src="dist/angular-tag.min.js"></script>
 <link rel="stylesheet" href="dist/angular-tag.min.css"/>
+<style type="text/css">
+     /* Horizontal Sortable */
+      .hthumbnail[jqyoui-droppable] { border: 1px solid red; }
+      .hthumbnail {
+        height: 50px;
+        width: 50px;
+        text-align: center;
+        padding-top: 0px;
+        cursor: pointer;
+        background: rgb(182, 173, 123);
+        position: relative;
+        -webkit-transition: none;
+        transition: none;
+      }
+      .hthumbnail.ng-leave {
+        -webkit-transition-duration: 0s;
+        transition-duration: 0s;
+        opacity: 1;
+      }
+      .hthumbnail.ng-leave.ng-leave-active {
+        opacity: 0;
+      }
+      .hthumbnail.ng-enter {
+        -webkit-transition: left 0.3s;
+        transition: left 0.3s;
+      }
+      .hthumbnail.ng-enter[data-direction="left"] {
+        left: -80px; /* 60px width + 20px marginLeft */
+      }
+      .hthumbnail.ng-enter[data-direction="right"] {
+        left: 80px; /* 60px width + 20px marginLeft */
+      }
+      .hthumbnail.ng-enter.ng-enter-active {
+        left: 0px;
+      }
+</style>
 
    <script>
-       angular.module('example',['ngAnimate','angular-tag'])
+       angular.module('example',['ngAnimate','ngDragDrop','angular-tag'])
 
          .controller('MainCtrl',function ($scope) {
     $scope.data=[{texti:'Jss1',added:'test'},{texti:'Jss2',add:'test3'},{texti:'Jss3',value:'owk'}];
@@ -22,6 +63,16 @@
                 console.log("Event:"+event.action);
                 console.log(event.item);
              };
+             
+             
+              $scope.list1 = [
+    { 'title': 'N', 'drag': true },
+    { 'title': 'L', 'drag': true },
+    { 'title': 'I', 'drag': true },
+    { 'title': 'I', 'drag': true },
+    { 'title': 'E', 'drag': true },
+    { 'title': 'N', 'drag': true }
+  ];
 
     })
    </script>
@@ -76,6 +127,6 @@
     <br>
     <button type="submit" ng-disabled="formName.fieldName.$error.required">Save</button>
 </form>
-
+ 
 </body>
 </html>
